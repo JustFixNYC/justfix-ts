@@ -4,6 +4,9 @@
   "main": "geosearch-requester.js",
   "types": "geosearch-requester.d.ts",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "concurrently": "^5.0.0",
     "rollup": "^1.23.1",
