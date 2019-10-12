@@ -3,7 +3,10 @@
  *
  * https://geosearch.planninglabs.nyc/docs/#autocomplete
  */
-const GEO_AUTOCOMPLETE_URL = 'https://geosearch.planninglabs.nyc/v1/autocomplete';
+export const GEO_AUTOCOMPLETE_URL = 'https://geosearch.planninglabs.nyc/v1/autocomplete';
+
+/** Default keyboard throttle milliseconds if not explicitly provided. */
+const DEFAULT_THROTTLE_MS = 250;
 
 /**
  * The keys here were obtained experimentally, I'm not actually sure
@@ -57,6 +60,8 @@ export interface GeoSearchProperties {
   label: string;
 }
 
+type AbortControllerFactory = () => AbortController|undefined;
+
 /**
  * Options for the requester constructor.
  */
@@ -66,26 +71,34 @@ export interface GeoSearchRequesterOptions {
    * or undefined if the platform doesn't support aborting
    * fetch requests.
    * 
+   * If not provided, a default implementation will be used.
+   * 
    * [1] https://developer.mozilla.org/en-US/docs/Web/API/AbortController
    */
-  createAbortController: () => AbortController|undefined;
+  createAbortController?: AbortControllerFactory;
 
   /**
    * A reference to the platform's Fetch API [1]. Note that
    * this will always be called with "this" bound to the
    * global scope.
    * 
+   * If not provided, this will default to the `fetch` global.
+   * However, if the `fetch` global is undefined, an exception
+   * will be thrown.
+   * 
    * [1] https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
    */
-  fetch: typeof window.fetch,
+  fetch?: typeof window.fetch,
 
   /**
    * The number of milliseconds to wait before we actually issue
    * a search request. This is primarily intended to allow
    * keyboard-based autocomplete UIs to not spam the server
    * when the user is typing quickly.
+   * 
+   * If not provided, this defaults to 250 ms.
    */
-  throttleMs: number,
+  throttleMs?: number,
 
   /**
    * A callback that's called whenever an error occurs fetching
@@ -99,6 +112,14 @@ export interface GeoSearchRequesterOptions {
    * called for stale queries.
    */
   onResults: (results: GeoSearchResults) => void;
+}
+
+/**
+ * Default AbortControllerFactory that returns an AbortController if
+ * one exists in global scope, but returns undefined otherwise.
+ */
+const defaultCreateAbortController: AbortControllerFactory = () => {
+  return typeof(AbortController) !== 'undefined' ? new AbortController() : undefined;
 }
 
 /**
@@ -120,10 +141,12 @@ export class GeoSearchRequester {
   private requestId: number;
   private abortController?: AbortController;
   private throttleTimeout: number|null;
+  private createAbortController: AbortControllerFactory;
 
   constructor(readonly options: GeoSearchRequesterOptions) {
     this.requestId = 0;
-    this.abortController = options.createAbortController();
+    this.createAbortController = options.createAbortController || defaultCreateAbortController;
+    this.abortController = this.createAbortController();
     this.throttleTimeout = null;
   }
 
@@ -138,9 +161,9 @@ export class GeoSearchRequester {
     // as this will bind its "this" context to the global scope
     // when it's called, which is important for most/all window.fetch()
     // implementations.
-    const { fetch } = this.options;
+    const fetchImpl = this.options.fetch || fetch;
 
-    return fetch(url, {
+    return fetchImpl(url, {
       signal: this.abortController && this.abortController.signal
     }).then(res => {
       if (res.status !== 200) {
@@ -181,7 +204,7 @@ export class GeoSearchRequester {
     this.requestId++;
     if (this.abortController) {
       this.abortController.abort();
-      this.abortController = this.options.createAbortController();
+      this.abortController = this.createAbortController();
     }
   }
 
@@ -198,7 +221,7 @@ export class GeoSearchRequester {
             this.options.onResults(results);
           }
         });
-      }, this.options.throttleMs);
+      }, this.options.throttleMs || DEFAULT_THROTTLE_MS);
       return true;
     }
     return false;
