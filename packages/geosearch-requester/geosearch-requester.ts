@@ -102,6 +102,16 @@ export interface GeoSearchRequesterOptions {
 }
 
 /**
+ * An error class for a non-200 HTTP status code response from the
+ * GeoSeach service.
+ */
+export class GeoSearchHttpStatusError extends Error {
+  constructor(readonly status: number) {
+    super(`Received HTTP ${status}`);
+  }
+}
+
+/**
  * This class can be used to issue search requests
  * based on a query whose value may change over time
  * due to e.g. keyboard input.
@@ -134,7 +144,7 @@ export class GeoSearchRequester {
       signal: this.abortController && this.abortController.signal
     }).then(res => {
       if (res.status !== 200) {
-        throw new Error(`Received HTTP ${res.status}`);
+        throw new GeoSearchHttpStatusError(res.status);
       }
       return res.json();
     }).catch((e) => {
