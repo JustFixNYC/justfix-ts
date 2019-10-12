@@ -1,0 +1,14 @@
+{
+  "name": "@justfix/geosearch-requester",
+  "version": "1.0.0",
+  "main": "geosearch-requester.js",
+  "typings": "geosearch-requester.d.ts",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "3.6.4"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  }
+}
