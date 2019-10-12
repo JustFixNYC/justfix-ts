@@ -5,7 +5,10 @@
  */
 export const GEO_AUTOCOMPLETE_URL = 'https://geosearch.planninglabs.nyc/v1/autocomplete';
 
-/** Default keyboard throttle milliseconds if not explicitly provided. */
+/**
+ * The default amount of milliseconds to wait before we actually issue
+ * a search request.
+ */
 const DEFAULT_THROTTLE_MS = 250;
 
 /**
@@ -58,6 +61,12 @@ export interface GeoSearchProperties {
 
   /** e.g. "150 COURT STREET, Brooklyn, New York, NY, USA" */
   label: string;
+
+  /**
+   * The 10-digit padded Borough-Block-Lot (BBL) number for the
+   * property, e.g. "3002920026".
+   */
+  pad_bbl: string;
 }
 
 type AbortControllerFactory = () => AbortController|undefined;
