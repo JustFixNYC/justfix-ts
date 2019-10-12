@@ -5,10 +5,13 @@
   "types": "geosearch-requester.d.ts",
   "license": "MIT",
   "devDependencies": {
+    "concurrently": "^5.0.0",
+    "rollup": "^1.23.1",
     "typescript": "3.6.4"
   },
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc --watch"
+    "build-manual-test": "rollup test-manual/geosearch-manual-test.js --format iife --file test-manual/geosearch-manual-test.bundle.js --sourcemap inline",
+    "build": "tsc && yarn build-manual-test",
+    "watch": "concurrently --kill-others \"tsc --watch\" \"yarn build-manual-test --watch\""
   }
 }
