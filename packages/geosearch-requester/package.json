@@ -1,5 +1,5 @@
 {
-  "name": "@justfix/geosearch-requester",
+  "name": "@justfixnyc/geosearch-requester",
   "version": "1.0.0",
   "main": "geosearch-requester.js",
   "types": "geosearch-requester.d.ts",
