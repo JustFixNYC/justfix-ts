@@ -13,7 +13,9 @@ function log(msg: string, level: 'info'|'error' = 'info') {
 
 function changeSearchRequest() {
   const {value} = inputEl;
-  gsr.changeSearchRequest(value);
+  if (!gsr.changeSearchRequest(value)) {
+    resultsEl.textContent = "";
+  }
 }
 
 const gsr = new GeoSearchRequester({
