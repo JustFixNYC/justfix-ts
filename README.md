@@ -1,7 +1,8 @@
 This is a [monorepo][] for TypeScript-based NPM packages that are
 intended for reuse across multiple JustFix.nyc properties.
 
-Individual packages can be found in the [`packages/` subdirectory](packages/).
+Individual packages can be found in the [`packages/`](packages/)  subdirectory.
+They are published to NPM under the `@justfixnyc` scope.
 
 ## Using packages
 
