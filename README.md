@@ -16,6 +16,15 @@ all dependencies:
 yarn
 ```
 
-Then `cd` into a package of your choice and follow its README instructions.
+Then `cd` into a package of your choice.
+
+Common commands that will work on all packages include:
+
+* `yarn build` will build the project.
+* `yarn watch` will watch the project's files for changes and rebuild them
+  when they change.
+
+Each package should also have a `CONTRIBUTING.md` that provides further
+guidance on developing it.
 
 [monorepo]: https://en.wikipedia.org/wiki/Monorepo
