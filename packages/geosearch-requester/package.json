@@ -17,6 +17,7 @@
     "typescript": "3.6.4"
   },
   "scripts": {
+    "prepublish": "yarn build",
     "build-manual-test": "rollup test-manual/geosearch-manual-test.js --format iife --file test-manual/geosearch-manual-test.bundle.js --sourcemap inline",
     "build": "tsc && yarn build-manual-test",
     "watch": "concurrently --kill-others \"tsc --watch\" \"yarn build-manual-test --watch\""
