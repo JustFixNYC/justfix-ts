@@ -151,12 +151,21 @@ export class GeoSearchRequester {
   private abortController?: AbortController;
   private throttleTimeout: number|null;
   private createAbortController: AbortControllerFactory;
+  private fetch: typeof window.fetch;
 
   constructor(readonly options: GeoSearchRequesterOptions) {
     this.requestId = 0;
     this.createAbortController = options.createAbortController || defaultCreateAbortController;
     this.abortController = this.createAbortController();
     this.throttleTimeout = null;
+
+    if (!options.fetch && typeof fetch === 'undefined') {
+      throw new Error(
+        "A fetch implementation was not passed to GeoSearchRequester, " +
+        "and one does not exist in the global scope!"
+      );
+    }
+    this.fetch = options.fetch || fetch;
   }
 
   /**
@@ -170,9 +179,9 @@ export class GeoSearchRequester {
     // as this will bind its "this" context to the global scope
     // when it's called, which is important for most/all window.fetch()
     // implementations.
-    const fetchImpl = this.options.fetch || fetch;
+    const {fetch} = this;
 
-    return fetchImpl(url, {
+    return fetch(url, {
       signal: this.abortController && this.abortController.signal
     }).then(res => {
       if (res.status !== 200) {
