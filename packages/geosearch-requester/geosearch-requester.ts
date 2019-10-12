@@ -56,6 +56,9 @@ export interface GeoSearchProperties {
   /** e.g. "150" */
   housenumber: string;
 
+  /** e.g. "COURT STREET" */
+  street: string;
+
   /** e.g. "150 COURT STREET" */
   name: string;
 
