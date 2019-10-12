@@ -110,6 +110,13 @@ export interface GeoSearchRequesterOptions {
   throttleMs?: number,
 
   /**
+   * An optional callback that is called whenever a search
+   * request has been aborted (because we've been given a
+   * newer search request that takes priority).
+   */
+  onAbort?: (searchText: string) => void;
+
+  /**
    * A callback that's called whenever an error occurs fetching
    * autocomplete results.
    */
@@ -191,6 +198,9 @@ export class GeoSearchRequester {
     }).catch((e) => {
       if (e instanceof DOMException && e.name === 'AbortError') {
         // Don't worry about it, the user just aborted the request.
+        if (this.options.onAbort) {
+          this.options.onAbort(value);
+        }
         return null;
       } else {
         throw e;

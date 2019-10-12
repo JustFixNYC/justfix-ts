@@ -11,7 +11,15 @@ function log(msg: string, level: 'info'|'error' = 'info') {
   logEl.appendChild(item);
 }
 
+function changeSearchRequest() {
+  const {value} = inputEl;
+  gsr.changeSearchRequest(value);
+}
+
 const gsr = new GeoSearchRequester({
+  onAbort(searchText) {
+    log(`A search request for "${searchText}" was aborted.`);
+  },
   onError(e) {
     log(`Network error: ${e}`, 'error');
     console.log(e);
@@ -26,7 +34,9 @@ const gsr = new GeoSearchRequester({
   }
 });
 
-inputEl.onkeyup = () => {
-  const {value} = inputEl;
-  gsr.changeSearchRequest(value);
-};
+inputEl.onkeyup = changeSearchRequest;
+
+// If we're on a browser like Firefox that caches form fields on page
+// reloads, this will automatically start searching for the current
+// field value.
+changeSearchRequest();
