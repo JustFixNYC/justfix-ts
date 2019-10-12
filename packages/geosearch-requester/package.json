@@ -1,6 +1,6 @@
 {
   "name": "@justfixnyc/geosearch-requester",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "geosearch-requester.js",
   "types": "geosearch-requester.d.ts",
   "license": "MIT",
