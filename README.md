@@ -9,11 +9,17 @@ Individual packages can be found in the [`packages/` subdirectory](packages/).
 
 ## Quick start
 
-Before working on any individual packages, run the following to install
-all dependencies:
+Before working on any individual packages, go to the root of the repository and
+run the following to install all dependencies:
 
 ```
-yarn
+yarn install
+```
+
+Then run the following to build all packages in the monorepo:
+
+```
+yarn build
 ```
 
 Then `cd` into a package of your choice.
@@ -26,5 +32,21 @@ Common commands that will work on all packages include:
 
 Each package should also have a `CONTRIBUTING.md` that provides further
 guidance on developing it.
+
+## Publishing packages
+
+Before publishing, you should make sure you are logged into `npm` as a
+user with publish access to the `@justfixnyc` organization/scope.  Use
+the following to check if you are logged in:
+
+```
+npm whoami
+```
+
+To publish all changed packages, go to the root of the repository and run:
+
+```
+yarn lerna publish
+```
 
 [monorepo]: https://en.wikipedia.org/wiki/Monorepo
