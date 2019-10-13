@@ -1,0 +1,22 @@
+{
+  "name": "@justfixnyc/util",
+  "version": "0.0.0",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/justfixnyc/justfix-ts/tree/master/packages/util"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "typescript": "3.6.4"
+  },
+  "scripts": {
+    "prepublish": "yarn build",
+    "build": "tsc",
+    "watch": "tsc --watch"
+  }
+}
