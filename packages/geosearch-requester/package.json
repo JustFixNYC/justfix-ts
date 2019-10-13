@@ -12,14 +12,15 @@
     "access": "public"
   },
   "devDependencies": {
+    "@justfixnyc/util": "*",
     "concurrently": "^5.0.0",
     "rollup": "^1.23.1",
+    "rollup-plugin-node-resolve": "^5.2.0",
     "typescript": "3.6.4"
   },
   "scripts": {
     "prepublish": "yarn build",
-    "build-manual-test": "rollup test-manual/geosearch-manual-test.js --format iife --file test-manual/geosearch-manual-test.bundle.js --sourcemap inline",
-    "build": "tsc && yarn build-manual-test",
-    "watch": "concurrently --kill-others \"tsc --watch\" \"yarn build-manual-test --watch\""
+    "build": "tsc && rollup -c",
+    "watch": "concurrently --kill-others \"tsc --watch --preserveWatchOutput\" \"rollup -c --watch\""
   }
 }

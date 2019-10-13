@@ -1,8 +1,10 @@
 import { GeoSearchRequester } from "../geosearch-requester";
 
-const inputEl = document.getElementsByTagName('input')[0];
-const resultsEl = document.getElementsByTagName('ol')[0];
-const logEl = document.getElementsByTagName('pre')[0];
+import { getHTMLElement } from "@justfixnyc/util";
+
+const inputEl = getHTMLElement('input', '#input');
+const resultsEl = getHTMLElement('ol', '#results');
+const logEl = getHTMLElement('pre', '#log');
 
 function log(msg: string, level: 'info'|'error' = 'info') {
   const item = document.createElement('div');
