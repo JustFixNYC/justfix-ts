@@ -2,3 +2,6 @@
 *.js.map
 *.d.ts
 node_modules
+
+!jest.config.js
+!babel.config.js
