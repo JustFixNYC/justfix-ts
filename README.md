@@ -55,11 +55,20 @@ See [tenants2#889][] for an example of these techniques in practice.
 [webpack-node-externals]: https://www.npmjs.com/package/webpack-node-externals
 [`whitelist`]: https://www.npmjs.com/package/webpack-node-externals#optionswhitelist-
 
+### Rollup
+
+Using Rollup is relatively straightforward, since it uses es2015 modules natively.
+You'll need to use the [`rollup-plugin-node-resolve`][] package so Rollup can
+find your dependencies using the Node module resolution algorithm. See
+[justfix-ts#1][] for an example.
+
+[`rollup-plugin-node-resolve`]: https://github.com/rollup/rollup-plugin-node-resolve
+
 ### Jest
 
 Jest normally doesn't transpile anything in `node_modules`, but this can be
-overridden via its [`transformIgnorePatterns`][] option. See [justfix-website#40][] for
-an example of this in practice.
+overridden via its [`transformIgnorePatterns`][] option. See [justfix-website#40][] or
+[justfix-ts#3][] for examples of this in practice.
 
 [`transformIgnorePatterns`]: https://jestjs.io/docs/en/configuration#transformignorepatterns-array-string
 
@@ -77,6 +86,8 @@ Gatsby also always transpiles `node_modules`, at least for production. See
 [justfix-website#40]: https://github.com/JustFixNYC/justfix-website/pull/40
 [who-owns-what#180]: https://github.com/JustFixNYC/who-owns-what/pull/180
 [tenants2#889]: https://github.com/JustFixNYC/tenants2/pull/889
+[justfix-ts#1]: https://github.com/JustFixNYC/justfix-ts/pull/1
+[justfix-ts#3]: https://github.com/JustFixNYC/justfix-ts/pull/3
 
 ## Developing packages
 
