@@ -3,6 +3,7 @@
   "workspaces": ["packages/*"],
   "scripts": {
     "lerna": "lerna",
+    "test": "lerna run test",
     "build": "lerna run build"
   },
   "devDependencies": {
