@@ -1,3 +1,5 @@
+[![Actions Status](https://github.com/JustFixNYC/justfix-ts/workflows/Node%20CI/badge.svg)](https://github.com/JustFixNYC/justfix-ts/actions)
+
 This is a [monorepo][] for TypeScript-based NPM packages that are
 intended for reuse across multiple JustFix.nyc properties.
 
