@@ -98,6 +98,8 @@ Common commands that will work on all packages include:
 * `yarn build` will build the project.
 * `yarn watch` will watch the project's files for changes and rebuild them
   when they change.
+* `yarn test` will run the project's tests.
+* `yarn test:watch` will run the project's tests, watching files for changes and re-running the test suite as needed.
 
 Each package should also have a `CONTRIBUTING.md` that provides further
 guidance on developing it.

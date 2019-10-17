@@ -16,9 +16,16 @@
     "concurrently": "^5.0.0",
     "rollup": "^1.23.1",
     "rollup-plugin-node-resolve": "^5.2.0",
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-typescript": "^7.6.0",
+    "@types/jest": "24.0.15",
+    "jest": "24.9.0",
     "typescript": "3.6.4"
   },
   "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
     "prepublish": "yarn build",
     "build": "tsc && rollup -c",
     "watch": "concurrently --kill-others \"tsc --watch --preserveWatchOutput\" \"rollup -c --watch\""
