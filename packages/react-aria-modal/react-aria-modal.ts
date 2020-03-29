@@ -141,7 +141,7 @@ export interface AriaModalProps {
    *
    * Default: rgba(0,0,0,0.5)
    */
-  underlayColor?: string;
+  underlayColor?: string|false;
 
   /**
    * If `true`, the modal's contents will be vertically (as well as horizontally) centered.
@@ -430,7 +430,7 @@ class Modal extends React.Component<AriaModalProps> {
 }
 
 type ReactAriaModal = React.ComponentType<AriaModalProps> & {
-  renderTo?: (input: string|Element) => React.ComponentType<AriaModalProps>
+  renderTo: (input: string|Element) => React.ComponentType<AriaModalProps>
 };
 
 const AriaModal = displace(Modal) as ReactAriaModal;

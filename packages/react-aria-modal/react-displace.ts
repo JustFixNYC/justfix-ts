@@ -10,10 +10,10 @@ type DisplaceOptions = {
 export function displace<P>(
   WrappedComponent: React.ComponentType<P>,
   optionalOptions?: DisplaceOptions
-): React.ComponentType<P> {
+): React.ComponentType<P & {mounted?: boolean}> {
   const options = optionalOptions || {};
 
-  class Displaced extends React.Component<P> {
+  class Displaced extends React.Component<P & {mounted?: boolean}> {
     container: Element|undefined;
 
     componentWillMount() {
@@ -42,6 +42,7 @@ export function displace<P>(
     }
 
     render() {
+      if (this.props.mounted === false) return null;
       if (this.container) {
         return ReactDOM.createPortal(
           React.createElement(WrappedComponent, this.props, this.props.children),
