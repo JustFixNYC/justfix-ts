@@ -1,11 +1,11 @@
+//@ts-check
 import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
 import replace from 'rollup-plugin-replace';
 
-import { RollupWatchOptions } from 'rollup';
-
-const config: RollupWatchOptions = {
-  input: 'test-manual/react-aria-modal-manual-test.js',
+/** @type import('rollup').RollupWatchOptions */
+const config = {
+  input: 'dist/test-manual/react-aria-modal-manual-test.js',
   output: {
     format: 'iife',
     file: 'test-manual/react-aria-modal-manual-test.bundle.js',

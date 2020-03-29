@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-dom/test-utils';
-import { ReactFocusTrap as FocusTrap } from './focus-trap-react';
+import { ReactFocusTrap as FocusTrap } from '../src/focus-trap-react';
 
 describe('deactivation', () => {
   let domContainer: any;

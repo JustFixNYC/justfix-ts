@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ReactFocusTrap as FocusTrap } from '../focus-trap-react';
-import AriaModal from '../react-aria-modal';
+import { ReactFocusTrap as FocusTrap } from '../src/focus-trap-react';
+import AriaModal from '../src/react-aria-modal';
 
 class DemoEight extends React.Component<any, any> {
   constructor(props: any) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AriaModal from '../react-aria-modal';
+import AriaModal from '../src/react-aria-modal';
 
 class DemoNine extends React.Component<any, any> {
   constructor(props: any) {

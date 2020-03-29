@@ -1,8 +1,8 @@
 {
   "name": "@justfixnyc/react-aria-modal",
   "version": "5.0.0",
-  "main": "react-aria-modal.js",
-  "types": "react-aria-modal.d.ts",
+  "main": "dist/src/react-aria-modal.js",
+  "types": "dist/src/react-aria-modal.d.ts",
   "license": "MIT",
   "repository": {
     "type": "git",
