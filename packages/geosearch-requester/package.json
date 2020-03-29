@@ -1,6 +1,6 @@
 {
   "name": "@justfixnyc/geosearch-requester",
-  "version": "0.0.7-alpha.0",
+  "version": "0.0.7-alpha.1",
   "main": "geosearch-requester.js",
   "types": "geosearch-requester.d.ts",
   "license": "MIT",
@@ -15,7 +15,7 @@
     "@babel/core": "7.6.4",
     "@babel/preset-env": "7.6.3",
     "@babel/preset-typescript": "7.6.0",
-    "@justfixnyc/util": "^0.0.1",
+    "@justfixnyc/util": "^0.0.2-alpha.0",
     "@types/jest": "24.0.15",
     "concurrently": "^5.0.0",
     "jest": "24.9.0",
