@@ -190,7 +190,8 @@ class Modal extends React.Component<AriaModalProps> {
     scrollDisabled: true
   };
 
-  componentWillMount() {
+  constructor(props: AriaModalProps) {
+    super(props);
     if (!this.props.titleText && !this.props.titleId) {
       throw new Error(
         'react-aria-modal instances should have a `titleText` or `titleId`'

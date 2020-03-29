@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- All usage of `componentWillMount()` have been removed, since the method has been deprecated.
+
 ## 5.0.0
 
 - Fork created at `@justfixnyc/react-aria-modal`.
