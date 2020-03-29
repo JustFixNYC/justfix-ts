@@ -1,8 +1,8 @@
 # Changelog
 
-## Unreleased
+## 5.1.0
 
-- All usage of `componentWillMount()` have been removed, since the method has been deprecated.
+- All uses of `componentWillMount()` have been removed, since the method has been deprecated.
 
 ## 5.0.0
 

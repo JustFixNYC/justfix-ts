@@ -2,7 +2,7 @@
 
 ---
 
-**THIS IS A FORK** This was forked from the original [react-aria-modal](https://github.com/davidtheclark/react-aria-modal), which was excellent but fell out of maintenance and was hard to change because of its lack of tests, the fact that it's in JavaScript (rather than TypeScript), and the fact that it has dependencies strewn across multiple github repositories (some of which have bugs that need fixing).
+**THIS IS A FORK.** This was forked from the original [react-aria-modal](https://github.com/davidtheclark/react-aria-modal), which was excellent but fell out of maintenance and was hard to change because of its lack of tests, the fact that it's in JavaScript (rather than TypeScript), and the fact that it has dependencies strewn across multiple github repositories (some of which have bugs that need fixing).
 
 Consequently, this fork does things a bit differently:
 
@@ -10,6 +10,7 @@ Consequently, this fork does things a bit differently:
 * It bundles up all react-aria-modals' dependencies into a single package (these can later be split out into separate individual packages in this monorepo, but bundling them all was the most expedient option to start with).
 * It converts the source code to TypeScript.
 * Like the other packages in the [justfix-ts](../../README.md) monorepo, its npm package is transpiled to es2019 with es2015 module code generation.
+* It fixes a few bugs (see [`CHANGELOG.md`](./CHANGELOG.md)).
 
 What follows is the mostly-unchanged README from the original package.
 
