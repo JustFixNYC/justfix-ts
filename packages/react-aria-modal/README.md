@@ -11,7 +11,7 @@ Consequently, this fork does things a bit differently:
 * It converts the source code to TypeScript.
 * Like the other packages in the [justfix-ts](../../README.md) monorepo, its npm package is transpiled to es2019 with es2015 module code generation.
 
-What follows is the original README from the original product.
+What follows is the mostly-unchanged README from the original package.
 
 ---
 
