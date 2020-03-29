@@ -347,11 +347,6 @@ class Modal extends React.Component<AriaModalProps> {
       };
     }
 
-    const verticalCenterHelperProps: HTMLDivProps = {
-      key: 'a',
-      style: verticalCenterStyle
-    };
-
     let dialogStyle: React.CSSProperties = {};
     if (props.includeDefaultStyles) {
       dialogStyle = {
@@ -403,12 +398,12 @@ class Modal extends React.Component<AriaModalProps> {
     }
 
     const childrenArray = [
-      React.createElement('div', dialogProps, props.children)
+      <div {...dialogProps}>{props.children}</div>,
     ];
 
     if (props.verticallyCenter) {
       childrenArray.unshift(
-        React.createElement('div', verticalCenterHelperProps)
+        <div key="a" style={verticalCenterStyle} />
       );
     }
 
@@ -420,13 +415,10 @@ class Modal extends React.Component<AriaModalProps> {
     }
     focusTrapOptions.escapeDeactivates = props.escapeExits;
 
-    return React.createElement(
-      ReactFocusTrap,
-      {
-        focusTrapOptions,
-        paused: props.focusTrapPaused
-      } as any,
-      React.createElement('div', underlayProps, childrenArray)
+    return (
+      <ReactFocusTrap focusTrapOptions={focusTrapOptions} paused={props.focusTrapPaused}>
+        <div {...underlayProps}>{childrenArray}</div>
+      </ReactFocusTrap>
     );
   }
 }
