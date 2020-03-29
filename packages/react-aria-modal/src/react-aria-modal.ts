@@ -153,7 +153,7 @@ export interface AriaModalProps {
    * You can use it to do whatever diverse and sundry things you feel like
    * doing after the modal activates.
    */
-  onEnter?(): any;
+  onEnter?: () => void,
 
   /**
    * This function needs to handles the state change of exiting (or deactivating) the modal.
@@ -163,16 +163,18 @@ export interface AriaModalProps {
    * That also makes it easier to create your own "close modal" buttons; because you
    * have the function that closes the modal right there, written by you, at your disposal.
    */
-  onExit(event: Event): any;
+  onExit?: (event: React.SyntheticEvent|Event) => void;
 
   scrollDisabled?: boolean;
 
-  underlayProps?: any;
+  underlayProps?: HTMLDivProps & any; // We're adding 'any' here to allow for e.g. "data-" attributes.
 
   focusTrapOptions?: Partial<FocusTrapOptions>;
 
   focusTrapPaused?: boolean;
 }
+
+type HTMLDivProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
 class Modal extends React.Component<AriaModalProps> {
   dialogNode: undefined|Element;
@@ -260,7 +262,7 @@ class Modal extends React.Component<AriaModalProps> {
     return this.props.applicationNode;
   };
 
-  checkUnderlayClick = (event: MouseEvent) => {
+  checkUnderlayClick = (event: React.MouseEvent) => {
     if (
       (this.dialogNode && event.target instanceof Node && this.dialogNode.contains(event.target)) ||
       // If the click is on the scrollbar we don't want to close the modal.
@@ -283,7 +285,7 @@ class Modal extends React.Component<AriaModalProps> {
     }
   };
 
-  exit = (event: Event) => {
+  exit = (event: React.SyntheticEvent|Event) => {
     if (this.props.onExit) {
       this.props.onExit(event);
     }
@@ -323,7 +325,7 @@ class Modal extends React.Component<AriaModalProps> {
       }
     }
 
-    const underlayProps: any = {
+    const underlayProps: HTMLDivProps = {
       className: props.underlayClass,
       style: style
     };
@@ -333,10 +335,10 @@ class Modal extends React.Component<AriaModalProps> {
     }
 
     for (const prop in this.props.underlayProps) {
-      underlayProps[prop] = this.props.underlayProps[prop];
+      (underlayProps as any)[prop] = (this.props.underlayProps as any)[prop];
     }
 
-    let verticalCenterStyle = {};
+    let verticalCenterStyle: React.CSSProperties = {};
     if (props.includeDefaultStyles) {
       verticalCenterStyle = {
         display: 'inline-block',
@@ -345,12 +347,12 @@ class Modal extends React.Component<AriaModalProps> {
       };
     }
 
-    const verticalCenterHelperProps: any = {
+    const verticalCenterHelperProps: HTMLDivProps = {
       key: 'a',
       style: verticalCenterStyle
     };
 
-    let dialogStyle: any = {};
+    let dialogStyle: React.CSSProperties = {};
     if (props.includeDefaultStyles) {
       dialogStyle = {
         display: 'inline-block',
@@ -358,7 +360,7 @@ class Modal extends React.Component<AriaModalProps> {
         top: 0,
         maxWidth: '100%',
         cursor: 'default',
-        outline: props.focusDialog ? 0 : null
+        outline: props.focusDialog ? 0 : undefined
       };
 
       if (props.verticallyCenter) {
@@ -370,13 +372,13 @@ class Modal extends React.Component<AriaModalProps> {
     if (props.dialogStyle) {
       for (const key in props.dialogStyle) {
         if (!props.dialogStyle.hasOwnProperty(key)) continue;
-        dialogStyle[key] = (props.dialogStyle as any)[key];
+        (dialogStyle as any)[key] = (props.dialogStyle as any)[key];
       }
     }
 
-    const dialogProps: any = {
+    const dialogProps: HTMLDivProps = {
       key: 'b',
-      ref: (el: Element) => {
+      ref: (el: HTMLDivElement) => {
         this.dialogNode = el;
       },
       role: props.alert ? 'alertdialog' : 'dialog',
@@ -390,13 +392,13 @@ class Modal extends React.Component<AriaModalProps> {
       dialogProps['aria-label'] = props.titleText;
     }
     if (props.focusDialog) {
-      dialogProps.tabIndex = '-1';
+      dialogProps.tabIndex = -1;
     }
 
     // Apply data- and aria- attributes passed as props
     for (let key in props) {
       if (/^(data-|aria-)/.test(key)) {
-        dialogProps[key] = (props as any)[key];
+        (dialogProps as any)[key] = (props as any)[key];
       }
     }
 
