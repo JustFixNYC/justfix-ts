@@ -1,4 +1,4 @@
-# react-aria-modal
+# @justfixnyc/react-aria-modal
 
 ---
 
@@ -58,7 +58,7 @@ Look in [`test-manual/`](test-manual/) for examples, but here's a simple example
 ```jsx
 const React = require('react');
 const ReactDOM = require('react-dom');
-const AriaModal = require('../../');
+const AriaModal = require('@justfixnyc/react-aria-modal');
 
 class DemoOne extends React.Component {
   constructor(props) {
@@ -379,7 +379,7 @@ See demo six for an example.
 An alert dialog that itself receives initial focus (but has no visible outline) and does not exit when the underlay is clicked, and is vertically centered:
 
 ```jsx
-var AriaModal = require('react-aria-modal');
+var AriaModal = require('@justfixnyc/react-aria-modal');
 
 var MyModal = React.createClass({
   ..
