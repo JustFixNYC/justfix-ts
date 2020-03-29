@@ -16,7 +16,7 @@ export function displace<P>(
   class Displaced extends React.Component<P & {mounted?: boolean}> {
     container: Element|undefined;
 
-    componentWillMount() {
+    componentDidMount() {
       this.container = (() => {
         const { renderTo } = options;
         if (!renderTo) {
@@ -33,6 +33,7 @@ export function displace<P>(
           return renderTo;
         }
       })();
+      this.forceUpdate();
     }
 
     componentWillUnmount() {
