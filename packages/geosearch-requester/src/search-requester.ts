@@ -69,7 +69,7 @@ export interface SearchRequesterOptions<SearchResults> {
  * Default AbortControllerFactory that returns an AbortController if
  * one exists in global scope, but returns undefined otherwise.
  */
-export const defaultCreateAbortController: AbortControllerFactory = () => {
+const defaultCreateAbortController: AbortControllerFactory = () => {
   return typeof(AbortController) !== 'undefined' ? new AbortController() : undefined;
 }
 
