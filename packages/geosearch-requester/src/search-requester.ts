@@ -1,83 +1,15 @@
 /**
- * For documentation about this endpoint, see:
- *
- * https://geosearch.planninglabs.nyc/docs/#autocomplete
- */
-export const GEO_AUTOCOMPLETE_URL = 'https://geosearch.planninglabs.nyc/v1/autocomplete';
-
-/**
  * The default amount of milliseconds to wait before we actually issue
  * a search request.
  */
 const DEFAULT_THROTTLE_MS = 250;
-
-/**
- * The keys here were obtained experimentally, I'm not actually sure
- * if/where they are formally specified.
- */
-export enum GeoSearchBoroughGid {
-  Manhattan = 'whosonfirst:borough:1',
-  Bronx = 'whosonfirst:borough:2',
-  Brooklyn = 'whosonfirst:borough:3',
-  Queens = 'whosonfirst:borough:4',
-  StatenIsland = 'whosonfirst:borough:5',
-}
-
-/**
- * This is what the NYC Geosearch API returns from its
- * autocomplete endpoint.
- * 
- * Note that some of the fields are "unknown", which
- * just implies that they exist but we're not really
- * sure what type they are (nor do we particularly
- * care, at the moment, for our purposes).
- */
-export interface GeoSearchResults {
-  bbox: unknown;
-  features: GeoSearchFeature[];
-}
-
-export interface GeoSearchFeature {
-  geometry: unknown;
-  properties: GeoSearchProperties
-}
-
-/**
- * Note that these are by no means all the
- * properties, they're just the ones we care about.
- */
-export interface GeoSearchProperties {
-  /** e.g. "Brooklyn" */
-  borough: string;
-
-  /** e.g. "whosonfirst:borough:2" */
-  borough_gid: GeoSearchBoroughGid;
-
-  /** e.g. "150" */
-  housenumber: string;
-
-  /** e.g. "COURT STREET" */
-  street: string;
-
-  /** e.g. "150 COURT STREET" */
-  name: string;
-
-  /** e.g. "150 COURT STREET, Brooklyn, New York, NY, USA" */
-  label: string;
-
-  /**
-   * The 10-digit padded Borough-Block-Lot (BBL) number for the
-   * property, e.g. "3002920026".
-   */
-  pad_bbl: string;
-}
 
 type AbortControllerFactory = () => AbortController|undefined;
 
 /**
  * Options for the requester constructor.
  */
-export interface GeoSearchRequesterOptions {
+export interface SearchRequesterOptions<SearchResults> {
   /**
    * A factory that returns an AbortController [1] instance,
    * or undefined if the platform doesn't support aborting
@@ -130,7 +62,7 @@ export interface GeoSearchRequesterOptions {
    * the most recently issued query. This will never be
    * called for stale queries.
    */
-  onResults: (results: GeoSearchResults) => void;
+  onResults: (results: SearchResults) => void;
 }
 
 /**
@@ -143,9 +75,9 @@ const defaultCreateAbortController: AbortControllerFactory = () => {
 
 /**
  * An error class for a non-200 HTTP status code response from the
- * GeoSeach service.
+ * seach service.
  */
-export class GeoSearchHttpStatusError extends Error {
+export class SearchHttpStatusError extends Error {
   constructor(readonly status: number) {
     super(`Received HTTP ${status}`);
   }
@@ -156,14 +88,14 @@ export class GeoSearchHttpStatusError extends Error {
  * based on a query whose value may change over time
  * due to e.g. keyboard input.
  */
-export class GeoSearchRequester {
+export abstract class SearchRequester<SearchResults> {
   private requestId: number;
   private abortController?: AbortController;
   private throttleTimeout: number|null;
   private createAbortController: AbortControllerFactory;
   private fetch: typeof window.fetch;
 
-  constructor(readonly options: GeoSearchRequesterOptions) {
+  constructor(readonly options: SearchRequesterOptions<SearchResults>) {
     this.requestId = 0;
     this.createAbortController = options.createAbortController || defaultCreateAbortController;
     this.abortController = this.createAbortController();
@@ -171,7 +103,7 @@ export class GeoSearchRequester {
 
     if (!options.fetch && typeof fetch === 'undefined') {
       throw new Error(
-        "A fetch implementation was not passed to GeoSearchRequester, " +
+        `A fetch implementation was not passed to ${this.constructor.name}, ` +
         "and one does not exist in the global scope!"
       );
     }
@@ -179,11 +111,17 @@ export class GeoSearchRequester {
   }
 
   /**
+   * Convert a search query into a URL that returns a JSON response with a
+   * HTTP 200 status code when it succeeds.
+   */
+  abstract searchQueryToURL(query: string): string;
+
+  /**
    * Fetch results for the given query, returning null if the
    * network request was aborted.
    */
-  private fetchResults(value: string): Promise<GeoSearchResults|null> {
-    const url = `${GEO_AUTOCOMPLETE_URL}?text=${encodeURIComponent(value)}`;
+  private fetchResults(value: string): Promise<SearchResults|null> {
+    const url = this.searchQueryToURL(value);
 
     // It's important that we pull fetch out as its own variable,
     // as this will bind its "this" context to the global scope
@@ -195,7 +133,7 @@ export class GeoSearchRequester {
       signal: this.abortController && this.abortController.signal
     }).then(res => {
       if (res.status !== 200) {
-        throw new GeoSearchHttpStatusError(res.status);
+        throw new SearchHttpStatusError(res.status);
       }
       return res.json();
     }).catch((e) => {
@@ -215,7 +153,7 @@ export class GeoSearchRequester {
    * Fetch results for the given query, returning null if the
    * query was superseded by a newer one.
    */
-  private async fetchResultsForLatestRequest(value: string): Promise<GeoSearchResults|null> {
+  private async fetchResultsForLatestRequest(value: string): Promise<SearchResults|null> {
     const originalRequestId = this.requestId;
     let results = await this.fetchResults(value);
     if (this.requestId === originalRequestId) {

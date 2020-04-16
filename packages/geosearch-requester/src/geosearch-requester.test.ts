@@ -1,4 +1,4 @@
-import { GeoSearchRequester, GeoSearchRequesterOptions } from "./geosearch-requester";
+import { GeoSearchRequester, GeoSearchRequesterOptions } from "./index";
 
 function makeOpts(opts?: Partial<GeoSearchRequesterOptions>): GeoSearchRequesterOptions {
   return {

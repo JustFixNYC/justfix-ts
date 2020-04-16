@@ -1,4 +1,4 @@
-import { GeoSearchRequester } from "../geosearch-requester";
+import { GeoSearchRequester } from "../src";
 
 import { getHTMLElement } from "@justfixnyc/util";
 
