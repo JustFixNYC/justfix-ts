@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
+* Factored out a `SearchRequester` class which can be adapted to use
+  any JSON API (not just NYC Planning Labs GeoSearch).
+
 ## 0.0.6 (2019-10-12)
 
 Had to re-publish because I didn't re-run `yarn build` before publishing. AWESOME.
