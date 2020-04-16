@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 0.1.0 (2020-04-16)
 
 * Factored out a `SearchRequester` class which can be adapted to use
   any JSON API (not just NYC Planning Labs GeoSearch).
