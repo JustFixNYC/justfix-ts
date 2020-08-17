@@ -1,1 +1,1 @@
-export { SampleComponent } from "./sample";
+export { CovidMoratoriumBanner } from "./moratorium-banner";
