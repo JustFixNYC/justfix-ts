@@ -1,6 +1,6 @@
 {
   "name": "@justfixnyc/react-aria-modal",
-  "version": "5.1.1-alpha.0",
+  "version": "5.1.1",
   "main": "dist/src/react-aria-modal.js",
   "types": "dist/src/react-aria-modal.d.ts",
   "license": "MIT",
