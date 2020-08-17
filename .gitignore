@@ -6,3 +6,4 @@ node_modules
 
 !jest.config.js
 !babel.config.js
+!rollup.config.js
