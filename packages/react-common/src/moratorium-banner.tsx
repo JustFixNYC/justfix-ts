@@ -10,8 +10,8 @@ export const CovidMoratoriumBanner: React.FC<{ locale?: string }> = ({
       normas establecidas durante la crisis de COVID-19. Todavía recomendamos
       que se tomen todas las precauciones posibles para mantenerse sanos durante
       esta crisis de salud pública. Gracias al poder de la organización de
-      inquilinos, los inquilinos no pueden ser desalojados por ninguna razón.
-      Visita las{" "}
+      inquilinos, los inquilinos no pueden ser desalojados por ninguna razón
+      hasta el 1 de octubre. Visita las{" "}
       <a
         href="https://www.righttocounselnyc.org/ny_eviction_moratorium_faq"
         target="_blank"
@@ -31,7 +31,7 @@ export const CovidMoratoriumBanner: React.FC<{ locale?: string }> = ({
       preliminary rules put in place during the COVID-19 crisis. We recommend
       you take full precautions to stay safe during this public health crisis.
       Thanks to tenant organizing during this time, renters cannot be evicted
-      for any reason. Visit{" "}
+      for any reason until October 1st. Visit{" "}
       <a
         href="https://www.righttocounselnyc.org/ny_eviction_moratorium_faq"
         target="_blank"
