@@ -13,14 +13,12 @@ export const CovidMoratoriumBanner: React.FC<{ locale?: string }> = ({
       inquilinos, los inquilinos no pueden ser desalojados por ninguna razón
       hasta el 1 de octubre. Visita las{" "}
       <a
-        href="https://www.righttocounselnyc.org/ny_eviction_moratorium_faq"
+        href="https://www.righttocounselnyc.org/moratoria_de_desalojo"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <b>
-          Preguntas Más Frecuentes sobre la Moratoria de Desalojo del Right to
-          Council
-        </b>
+        Preguntas Más Frecuentes sobre la Moratoria de Desalojo del Right to
+        Council
       </a>{" "}
       para obtener más información.
     </>
@@ -37,7 +35,7 @@ export const CovidMoratoriumBanner: React.FC<{ locale?: string }> = ({
         target="_blank"
         rel="noopener noreferrer"
       >
-        <b>Right to Council’s Eviction Moratorium FAQs</b>
+        Right to Council’s Eviction Moratorium FAQs
       </a>{" "}
       to learn more.
     </>

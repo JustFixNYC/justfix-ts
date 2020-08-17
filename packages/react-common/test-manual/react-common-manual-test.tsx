@@ -6,9 +6,11 @@ import { getHTMLElement } from "@justfixnyc/util";
 const container = getHTMLElement("div", "#root");
 const el = ReactDOM.render(
   <div>
-    <h1>English Version (Default):</h1>
+    <h1>Components</h1>
+    <h2>COVID Moratorium Banner</h2>
+    <h3>English Version (Default):</h3>
     <CovidMoratoriumBanner />
-    <h1>Spanish Version:</h1>
+    <h3>Spanish Version:</h3>
     <CovidMoratoriumBanner locale="es" />
   </div>,
   container,
