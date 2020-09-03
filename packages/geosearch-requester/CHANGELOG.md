@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.2.0 (2020-09-03)
+
+* Added a new optional constructor parameter called `customGeoAutocompleteUrl`.
+
 ## 0.1.0 (2020-04-16)
 
 * Factored out a `SearchRequester` class which can be adapted to use
