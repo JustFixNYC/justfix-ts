@@ -1,34 +1,42 @@
 import { SearchRequester, SearchRequesterOptions } from "./search-requester";
 
-export {
-  SearchHttpStatusError as GeoSearchHttpStatusError,
-} from "./search-requester";
+export { SearchHttpStatusError as GeoSearchHttpStatusError } from "./search-requester";
 
-export type GeoSearchRequesterOptions = SearchRequesterOptions<GeoSearchResults>;
+export type GeoSearchRequesterOptions = SearchRequesterOptions<
+  GeoSearchResults
+> & {
+  /**
+   * (Optional)
+   * A custom base url for GeoAutocomplete endpoint, like `https://www.boop.com/v1/autocomplete`.
+   * If not defined, the standard NYC Planning Labs GeoSearch Autocomplete url is used.
+   */
+  customGeoAutocompleteUrl?: string;
+};
 
 /**
  * For documentation about this endpoint, see:
  *
  * https://geosearch.planninglabs.nyc/docs/#autocomplete
  */
-export const GEO_AUTOCOMPLETE_URL = 'https://geosearch.planninglabs.nyc/v1/autocomplete';
+export const GEO_AUTOCOMPLETE_URL =
+  "https://geosearch.planninglabs.nyc/v1/autocomplete";
 
 /**
  * The keys here were obtained experimentally, I'm not actually sure
  * if/where they are formally specified.
  */
 export enum GeoSearchBoroughGid {
-  Manhattan = 'whosonfirst:borough:1',
-  Bronx = 'whosonfirst:borough:2',
-  Brooklyn = 'whosonfirst:borough:3',
-  Queens = 'whosonfirst:borough:4',
-  StatenIsland = 'whosonfirst:borough:5',
+  Manhattan = "whosonfirst:borough:1",
+  Bronx = "whosonfirst:borough:2",
+  Brooklyn = "whosonfirst:borough:3",
+  Queens = "whosonfirst:borough:4",
+  StatenIsland = "whosonfirst:borough:5",
 }
 
 /**
  * This is what the NYC Geosearch API returns from its
  * autocomplete endpoint.
- * 
+ *
  * Note that some of the fields are "unknown", which
  * just implies that they exist but we're not really
  * sure what type they are (nor do we particularly
@@ -41,7 +49,7 @@ export interface GeoSearchResults {
 
 export interface GeoSearchFeature {
   geometry: unknown;
-  properties: GeoSearchProperties
+  properties: GeoSearchProperties;
 }
 
 /**
@@ -80,7 +88,12 @@ export interface GeoSearchProperties {
  * due to e.g. keyboard input.
  */
 export class GeoSearchRequester extends SearchRequester<GeoSearchResults> {
+  constructor(readonly options: GeoSearchRequesterOptions) {
+    super(options);
+  }
   searchQueryToURL(query: string): string {
-    return `${GEO_AUTOCOMPLETE_URL}?text=${encodeURIComponent(query)}`;
+    return `${
+      this.options.customGeoAutocompleteUrl || GEO_AUTOCOMPLETE_URL
+    }?text=${encodeURIComponent(query)}`;
   }
 }
