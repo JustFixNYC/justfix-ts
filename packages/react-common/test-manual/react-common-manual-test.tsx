@@ -13,5 +13,5 @@ const el = ReactDOM.render(
     <h3>Spanish Version:</h3>
     <CovidMoratoriumBanner locale="es" />
   </div>,
-  container,
+  container
 );

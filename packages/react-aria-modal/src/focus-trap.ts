@@ -1,13 +1,13 @@
 // https://github.com/davidtheclark/focus-trap/blob/master/index.js
 
-import { tabbable } from './tabbable';
+import { tabbable } from "./tabbable";
 
-var activeFocusDelay: number|undefined;
+var activeFocusDelay: number | undefined;
 
-var activeFocusTraps = (function() {
+var activeFocusTraps = (function () {
   var trapQueue: FocusTrap[] = [];
   return {
-    activateTrap: function(trap: FocusTrap) {
+    activateTrap: function (trap: FocusTrap) {
       if (trapQueue.length > 0) {
         var activeTrap = trapQueue[trapQueue.length - 1];
         if (activeTrap !== trap) {
@@ -25,7 +25,7 @@ var activeFocusTraps = (function() {
       }
     },
 
-    deactivateTrap: function(trap: FocusTrap) {
+    deactivateTrap: function (trap: FocusTrap) {
       var trapIndex = trapQueue.indexOf(trap);
       if (trapIndex !== -1) {
         trapQueue.splice(trapIndex, 1);
@@ -34,39 +34,39 @@ var activeFocusTraps = (function() {
       if (trapQueue.length > 0) {
         trapQueue[trapQueue.length - 1].unpause();
       }
-    }
+    },
   };
 })();
 
-type OptionalNodeThingy = Element|string|(() => Element);
+type OptionalNodeThingy = Element | string | (() => Element);
 
 export type FocusTrapOptions = {
-  returnFocusOnDeactivate: boolean,
-  escapeDeactivates: boolean,
-  preventScroll?: boolean,
-  clickOutsideDeactivates?: boolean,
-  allowOutsideClick?: (event: MouseEvent|TouchEvent) => boolean,
-  onActivate?: () => void,
-  onDeactivate?: () => void,
-  initialFocus?: OptionalNodeThingy,
-  fallbackFocus?: OptionalNodeThingy,
-  setReturnFocus?: OptionalNodeThingy,
+  returnFocusOnDeactivate: boolean;
+  escapeDeactivates: boolean;
+  preventScroll?: boolean;
+  clickOutsideDeactivates?: boolean;
+  allowOutsideClick?: (event: MouseEvent | TouchEvent) => boolean;
+  onActivate?: () => void;
+  onDeactivate?: () => void;
+  initialFocus?: OptionalNodeThingy;
+  fallbackFocus?: OptionalNodeThingy;
+  setReturnFocus?: OptionalNodeThingy;
 };
 
 type ActivateOptions = {
-  onActivate?: () => void
+  onActivate?: () => void;
 };
 
 type DeactivateOptions = {
-  onDeactivate?: () => void,
-  returnFocus?: boolean,
+  onDeactivate?: () => void;
+  returnFocus?: boolean;
 };
 
 export interface FocusTrap {
-  activate: (options?: ActivateOptions) => void,
-  deactivate: (options?: DeactivateOptions) => void,
-  pause: () => void,
-  unpause: () => void,
+  activate: (options?: ActivateOptions) => void;
+  deactivate: (options?: DeactivateOptions) => void;
+  pause: () => void;
+  unpause: () => void;
 }
 
 function getHTMLElement(doc: HTMLDocument, selector: string): HTMLElement {
@@ -78,18 +78,21 @@ function getHTMLElement(doc: HTMLDocument, selector: string): HTMLElement {
 }
 
 type FocusTrapState = {
-  firstTabbableNode: Element|null,
-  lastTabbableNode: Element|null,
-  nodeFocusedBeforeActivation: Element|null,
-  mostRecentlyFocusedNode: Element|null,
-  active: boolean,
-  paused: boolean,
+  firstTabbableNode: Element | null;
+  lastTabbableNode: Element | null;
+  nodeFocusedBeforeActivation: Element | null;
+  mostRecentlyFocusedNode: Element | null;
+  active: boolean;
+  paused: boolean;
 };
 
-export function createFocusTrap(element: HTMLElement|string, userOptions: Partial<FocusTrapOptions>): FocusTrap {
+export function createFocusTrap(
+  element: HTMLElement | string,
+  userOptions: Partial<FocusTrapOptions>
+): FocusTrap {
   var doc = document;
   const container =
-    typeof element === 'string' ? getHTMLElement(doc, element) : element;
+    typeof element === "string" ? getHTMLElement(doc, element) : element;
 
   var config: FocusTrapOptions = {
     returnFocusOnDeactivate: true,
@@ -103,14 +106,14 @@ export function createFocusTrap(element: HTMLElement|string, userOptions: Partia
     nodeFocusedBeforeActivation: null,
     mostRecentlyFocusedNode: null,
     active: false,
-    paused: false
+    paused: false,
   };
 
   var trap: FocusTrap = {
     activate,
     deactivate,
     pause,
-    unpause
+    unpause,
   };
 
   return trap;
@@ -160,7 +163,7 @@ export function createFocusTrap(element: HTMLElement|string, userOptions: Partia
         ? deactivateOptions.returnFocus
         : config.returnFocusOnDeactivate;
     if (returnFocus) {
-      delay(function() {
+      delay(function () {
         tryFocus(getReturnFocusNode(state.nodeFocusedBeforeActivation));
       });
     }
@@ -168,7 +171,7 @@ export function createFocusTrap(element: HTMLElement|string, userOptions: Partia
     return trap;
   }
 
-  function containerContains(el: Node|EventTarget|null): boolean {
+  function containerContains(el: Node | EventTarget | null): boolean {
     if (el && el instanceof Node) return container.contains(el);
     return false;
   }
@@ -194,26 +197,26 @@ export function createFocusTrap(element: HTMLElement|string, userOptions: Partia
 
     // Delay ensures that the focused element doesn't capture the event
     // that caused the focus trap activation.
-    activeFocusDelay = delay(function() {
+    activeFocusDelay = delay(function () {
       tryFocus(getInitialFocusNode());
     });
 
-    doc.addEventListener('focusin', checkFocusIn, true);
-    doc.addEventListener('mousedown', checkPointerDown, {
+    doc.addEventListener("focusin", checkFocusIn, true);
+    doc.addEventListener("mousedown", checkPointerDown, {
       capture: true,
-      passive: false
+      passive: false,
     });
-    doc.addEventListener('touchstart', checkPointerDown, {
+    doc.addEventListener("touchstart", checkPointerDown, {
       capture: true,
-      passive: false
+      passive: false,
     });
-    doc.addEventListener('click', checkClick, {
+    doc.addEventListener("click", checkClick, {
       capture: true,
-      passive: false
+      passive: false,
     });
-    doc.addEventListener('keydown', checkKey, {
+    doc.addEventListener("keydown", checkKey, {
       capture: true,
-      passive: false
+      passive: false,
     });
 
     return trap;
@@ -222,31 +225,33 @@ export function createFocusTrap(element: HTMLElement|string, userOptions: Partia
   function removeListeners() {
     if (!state.active) return;
 
-    doc.removeEventListener('focusin', checkFocusIn, true);
-    doc.removeEventListener('mousedown', checkPointerDown, true);
-    doc.removeEventListener('touchstart', checkPointerDown, true);
-    doc.removeEventListener('click', checkClick, true);
-    doc.removeEventListener('keydown', checkKey, true);
+    doc.removeEventListener("focusin", checkFocusIn, true);
+    doc.removeEventListener("mousedown", checkPointerDown, true);
+    doc.removeEventListener("touchstart", checkPointerDown, true);
+    doc.removeEventListener("click", checkClick, true);
+    doc.removeEventListener("keydown", checkKey, true);
 
     return trap;
   }
 
-  function getNodeForOption(optionName: keyof FocusTrapOptions): Element|null {
-    var optionValue = (config[optionName] as any);
+  function getNodeForOption(
+    optionName: keyof FocusTrapOptions
+  ): Element | null {
+    var optionValue = config[optionName] as any;
     var node: any = optionValue;
     if (!optionValue) {
       return null;
     }
-    if (typeof optionValue === 'string') {
+    if (typeof optionValue === "string") {
       node = doc.querySelector(optionValue);
       if (!node) {
-        throw new Error('`' + optionName + '` refers to no known node');
+        throw new Error("`" + optionName + "` refers to no known node");
       }
     }
-    if (typeof optionValue === 'function') {
+    if (typeof optionValue === "function") {
       node = optionValue();
       if (!node) {
-        throw new Error('`' + optionName + '` did not return a node');
+        throw new Error("`" + optionName + "` did not return a node");
       }
     }
     return node;
@@ -254,35 +259,37 @@ export function createFocusTrap(element: HTMLElement|string, userOptions: Partia
 
   function getInitialFocusNode() {
     var node;
-    if (getNodeForOption('initialFocus') !== null) {
-      node = getNodeForOption('initialFocus');
+    if (getNodeForOption("initialFocus") !== null) {
+      node = getNodeForOption("initialFocus");
     } else if (container.contains(doc.activeElement)) {
       node = doc.activeElement;
     } else {
-      node = state.firstTabbableNode || getNodeForOption('fallbackFocus');
+      node = state.firstTabbableNode || getNodeForOption("fallbackFocus");
     }
 
     if (!node) {
       throw new Error(
-        'Your focus-trap needs to have at least one focusable element'
+        "Your focus-trap needs to have at least one focusable element"
       );
     }
 
     return node;
   }
 
-  function getReturnFocusNode(previousActiveElement: Element|null): Element|null {
-    var node = getNodeForOption('setReturnFocus');
+  function getReturnFocusNode(
+    previousActiveElement: Element | null
+  ): Element | null {
+    var node = getNodeForOption("setReturnFocus");
     return node ? node : previousActiveElement;
   }
 
   // This needs to be done on mousedown and touchstart instead of click
   // so that it precedes the focus event.
-  function checkPointerDown(e: MouseEvent|TouchEvent) {
+  function checkPointerDown(e: MouseEvent | TouchEvent) {
     if (containerContains(e.target)) return;
     if (config.clickOutsideDeactivates) {
       deactivate({
-        returnFocus: !tabbable.isFocusable(e.target)
+        returnFocus: !tabbable.isFocusable(e.target),
       });
       return;
     }
@@ -358,7 +365,7 @@ export function createFocusTrap(element: HTMLElement|string, userOptions: Partia
       tryFocus(getInitialFocusNode());
       return;
     }
-    node.focus({preventScroll: userOptions.preventScroll});
+    node.focus({ preventScroll: userOptions.preventScroll });
     state.mostRecentlyFocusedNode = node;
     if (isSelectableInput(node)) {
       node.select();
@@ -369,17 +376,17 @@ export function createFocusTrap(element: HTMLElement|string, userOptions: Partia
 function isSelectableInput(node: any): node is HTMLInputElement {
   return (
     node.tagName &&
-    node.tagName.toLowerCase() === 'input' &&
-    typeof (node as any).select === 'function'
+    node.tagName.toLowerCase() === "input" &&
+    typeof (node as any).select === "function"
   );
 }
 
 function isEscapeEvent(e: KeyboardEvent): boolean {
-  return e.key === 'Escape' || e.key === 'Esc' || e.keyCode === 27;
+  return e.key === "Escape" || e.key === "Esc" || e.keyCode === 27;
 }
 
 function isTabEvent(e: KeyboardEvent): boolean {
-  return e.key === 'Tab' || e.keyCode === 9;
+  return e.key === "Tab" || e.keyCode === 9;
 }
 
 function delay(fn: Function): number {

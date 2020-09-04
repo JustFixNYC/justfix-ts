@@ -1,27 +1,27 @@
 // https://github.com/davidtheclark/tabbable/blob/master/src/index.js
 
 let candidateSelectors = [
-  'input',
-  'select',
-  'textarea',
-  'a[href]',
-  'button',
-  '[tabindex]',
-  'audio[controls]',
-  'video[controls]',
+  "input",
+  "select",
+  "textarea",
+  "a[href]",
+  "button",
+  "[tabindex]",
+  "audio[controls]",
+  "video[controls]",
   '[contenteditable]:not([contenteditable="false"])',
 ];
-let candidateSelector = candidateSelectors.join(',');
+let candidateSelector = candidateSelectors.join(",");
 
 let matches: (selector: string) => boolean =
-  typeof Element === 'undefined'
+  typeof Element === "undefined"
     ? () => false
     : Element.prototype.matches ||
       (Element.prototype as any).msMatchesSelector ||
       Element.prototype.webkitMatchesSelector;
 
 type TabbableOptions = {
-  includeContainer?: boolean,
+  includeContainer?: boolean;
 };
 
 function getHTMLElements(root: Element, selector: string): HTMLElement[] {
@@ -37,12 +37,15 @@ function getHTMLElements(root: Element, selector: string): HTMLElement[] {
 }
 
 type OrderedTabbable = {
-  documentOrder: number,
-  tabIndex: number,
-  node: HTMLElement,
+  documentOrder: number;
+  tabIndex: number;
+  node: HTMLElement;
 };
 
-export function tabbable(el: HTMLElement, optionalOptions?: TabbableOptions): HTMLElement[] {
+export function tabbable(
+  el: HTMLElement,
+  optionalOptions?: TabbableOptions
+): HTMLElement[] {
   const options = optionalOptions || {};
 
   let regularTabbables: HTMLElement[] = [];
@@ -80,7 +83,7 @@ export function tabbable(el: HTMLElement, optionalOptions?: TabbableOptions): HT
 
   let tabbableNodes = orderedTabbables
     .sort(sortOrderedTabbables)
-    .map(a => a.node)
+    .map((a) => a.node)
     .concat(regularTabbables);
 
   return tabbableNodes;
@@ -102,7 +105,7 @@ function isNodeMatchingSelectorTabbable(node: HTMLElement): boolean {
 
 function isTabbable(node: HTMLElement): boolean {
   if (!node) {
-    throw new Error('No node provided');
+    throw new Error("No node provided");
   }
   if (matches.call(node, candidateSelector) === false) {
     return false;
@@ -117,11 +120,11 @@ function isNodeMatchingSelectorFocusable(node: HTMLElement): boolean {
   return true;
 }
 
-let focusableCandidateSelector = candidateSelectors.concat('iframe').join(',');
+let focusableCandidateSelector = candidateSelectors.concat("iframe").join(",");
 
-function isFocusable(node?: EventTarget|HTMLElement|null): boolean {
+function isFocusable(node?: EventTarget | HTMLElement | null): boolean {
   if (!node) {
-    throw new Error('No node provided');
+    throw new Error("No node provided");
   }
 
   // Added this to make TypeScript work.
@@ -134,7 +137,7 @@ function isFocusable(node?: EventTarget|HTMLElement|null): boolean {
 }
 
 function getTabindex(node: HTMLElement): number {
-  let tabindexAttr = parseInt(node.getAttribute('tabindex') || '', 10);
+  let tabindexAttr = parseInt(node.getAttribute("tabindex") || "", 10);
   if (!isNaN(tabindexAttr)) {
     return tabindexAttr;
   }
@@ -153,26 +156,28 @@ function sortOrderedTabbables(a: OrderedTabbable, b: OrderedTabbable): number {
 }
 
 function isContentEditable(node: HTMLElement): boolean {
-  return node.contentEditable === 'true';
+  return node.contentEditable === "true";
 }
 
 function isInput(node: Element): node is HTMLInputElement {
-  return node.tagName === 'INPUT';
+  return node.tagName === "INPUT";
 }
 
 function isHiddenInput(node: Element): boolean {
-  return isInput(node) && node.type === 'hidden';
+  return isInput(node) && node.type === "hidden";
 }
 
 function isRadio(node: Element): node is HTMLInputElement {
-  return isInput(node) && node.type === 'radio';
+  return isInput(node) && node.type === "radio";
 }
 
 function isNonTabbableRadio(node: Element): boolean {
   return isRadio(node) && !isTabbableRadio(node);
 }
 
-function getCheckedRadio(nodes: HTMLInputElement[]): HTMLInputElement|undefined {
+function getCheckedRadio(
+  nodes: HTMLInputElement[]
+): HTMLInputElement | undefined {
   for (let i = 0; i < nodes.length; i++) {
     if (nodes[i].checked) {
       return nodes[i];
@@ -193,9 +198,11 @@ function isTabbableRadio(node: HTMLInputElement): boolean {
   }
   // This won't account for the edge case where you have radio groups with the same
   // in separate forms on the same page.
-  let radioSet = Array.from(node.ownerDocument.querySelectorAll(
-    'input[type="radio"][name="' + node.name + '"]'
-  )) as HTMLInputElement[];
+  let radioSet = Array.from(
+    node.ownerDocument.querySelectorAll(
+      'input[type="radio"][name="' + node.name + '"]'
+    )
+  ) as HTMLInputElement[];
   let checked = getCheckedRadio(radioSet);
   return !checked || checked === node;
 }
@@ -204,6 +211,6 @@ function isHidden(node: HTMLElement): boolean {
   // offsetParent being null will allow detecting cases where an element is invisible or inside an invisible element,
   // as long as the element does not use position: fixed. For them, their visibility has to be checked directly as well.
   return (
-    node.offsetParent === null || getComputedStyle(node).visibility === 'hidden'
+    node.offsetParent === null || getComputedStyle(node).visibility === "hidden"
   );
 }

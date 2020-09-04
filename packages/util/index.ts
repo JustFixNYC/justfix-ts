@@ -1,6 +1,2 @@
-export { getHTMLElement } from './get-html-element';
-export {
-  assertNotNull,
-  assertNotUndefined,
-  hardFail
-} from "./assertions";
+export { getHTMLElement } from "./get-html-element";
+export { assertNotNull, assertNotUndefined, hardFail } from "./assertions";

@@ -1,14 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import TestUtils from 'react-dom/test-utils';
-import { ReactFocusTrap as FocusTrap } from '../src/focus-trap-react';
+import React from "react";
+import ReactDOM from "react-dom";
+import TestUtils from "react-dom/test-utils";
+import { ReactFocusTrap as FocusTrap } from "../src/focus-trap-react";
 
-describe('activation', () => {
+describe("activation", () => {
   let domContainer: any;
   const createMockFocusTrap = () => ({
     activate: jest.fn(),
     deactivate: jest.fn(),
-    pause: jest.fn()
+    pause: jest.fn(),
   });
   let mockFocusTrap = createMockFocusTrap();
   let mockCreateFocusTrap: any;
@@ -16,7 +16,7 @@ describe('activation', () => {
   beforeEach(() => {
     mockFocusTrap = createMockFocusTrap();
     mockCreateFocusTrap = jest.fn(() => mockFocusTrap);
-    domContainer = document.createElement('div');
+    domContainer = document.createElement("div");
     document.body.appendChild(domContainer);
   });
 
@@ -25,15 +25,13 @@ describe('activation', () => {
     document.body.removeChild(domContainer);
   });
 
-  test('default activation', () => {
+  test("default activation", () => {
     const trap = ReactDOM.render(
       <FocusTrap
         _createFocusTrap={mockCreateFocusTrap}
         focusTrapOptions={{ onDeactivate: noop }}
       >
-        <button>
-          something special
-        </button>
+        <button>something special</button>
       </FocusTrap>,
       domContainer
     );
@@ -43,27 +41,23 @@ describe('activation', () => {
       ReactDOM.findDOMNode(trap as any),
       {
         onDeactivate: noop,
-        returnFocusOnDeactivate: false
+        returnFocusOnDeactivate: false,
       }
     );
   });
 
-  test('activation with initialFocus as selector', () => {
+  test("activation with initialFocus as selector", () => {
     const trap = ReactDOM.render(
       <FocusTrap
         _createFocusTrap={mockCreateFocusTrap}
         focusTrapOptions={{
           onDeactivate: noop,
-          initialFocus: '#initial-focusee'
+          initialFocus: "#initial-focusee",
         }}
       >
         <div>
-          <button>
-            something special
-          </button>
-          <button id="initial-focusee">
-            another thing
-          </button>
+          <button>something special</button>
+          <button id="initial-focusee">another thing</button>
         </div>
       </FocusTrap>,
       domContainer
@@ -74,22 +68,20 @@ describe('activation', () => {
       ReactDOM.findDOMNode(trap as any),
       {
         onDeactivate: noop,
-        initialFocus: '#initial-focusee',
-        returnFocusOnDeactivate: false
+        initialFocus: "#initial-focusee",
+        returnFocusOnDeactivate: false,
       }
     );
   });
 
-  test('mounting without activation', () => {
+  test("mounting without activation", () => {
     ReactDOM.render(
       <FocusTrap
         _createFocusTrap={mockCreateFocusTrap}
         focusTrapOptions={{ onDeactivate: noop }}
         active={false}
       >
-        <button>
-          something special
-        </button>
+        <button>something special</button>
       </FocusTrap>,
       domContainer
     );
@@ -97,10 +89,10 @@ describe('activation', () => {
     expect(mockFocusTrap.activate).toHaveBeenCalledTimes(0);
   });
 
-  test('mounting without activation then activating', () => {
+  test("mounting without activation then activating", () => {
     class TestZone extends React.Component {
       state = {
-        trapActive: false
+        trapActive: false,
       };
 
       activateTrap = () => {
@@ -119,9 +111,7 @@ describe('activation', () => {
               focusTrapOptions={{ onDeactivate: noop }}
               active={this.state.trapActive}
             >
-              <button>
-                something special
-              </button>
+              <button>something special</button>
             </FocusTrap>
           </div>
         );
@@ -135,7 +125,7 @@ describe('activation', () => {
       ReactDOM.findDOMNode(zone.refs.trap),
       {
         onDeactivate: noop,
-        returnFocusOnDeactivate: false
+        returnFocusOnDeactivate: false,
       }
     );
     expect(mockFocusTrap.activate).toHaveBeenCalledTimes(0);

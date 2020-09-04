@@ -1,11 +1,11 @@
 // https://github.com/davidtheclark/react-aria-modal/blob/master/src/react-aria-modal.js
 
-import React from 'react';
+import React from "react";
 
-import * as noScroll from './no-scroll';
-import { FocusTrapOptions } from './focus-trap';
-import { ReactFocusTrap } from './focus-trap-react';
-import { displace } from './react-displace';
+import * as noScroll from "./no-scroll";
+import { FocusTrapOptions } from "./focus-trap";
+import { ReactFocusTrap } from "./focus-trap-react";
+import { displace } from "./react-displace";
 
 export interface AriaModalProps {
   /**
@@ -141,7 +141,7 @@ export interface AriaModalProps {
    *
    * Default: rgba(0,0,0,0.5)
    */
-  underlayColor?: string|false;
+  underlayColor?: string | false;
 
   /**
    * If `true`, the modal's contents will be vertically (as well as horizontally) centered.
@@ -153,7 +153,7 @@ export interface AriaModalProps {
    * You can use it to do whatever diverse and sundry things you feel like
    * doing after the modal activates.
    */
-  onEnter?: () => void,
+  onEnter?: () => void;
 
   /**
    * This function needs to handles the state change of exiting (or deactivating) the modal.
@@ -163,7 +163,7 @@ export interface AriaModalProps {
    * That also makes it easier to create your own "close modal" buttons; because you
    * have the function that closes the modal right there, written by you, at your disposal.
    */
-  onExit?: (event: React.SyntheticEvent|Event) => void;
+  onExit?: (event: React.SyntheticEvent | Event) => void;
 
   scrollDisabled?: boolean;
 
@@ -174,27 +174,30 @@ export interface AriaModalProps {
   focusTrapPaused?: boolean;
 }
 
-type HTMLDivProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+type HTMLDivProps = React.DetailedHTMLProps<
+  React.HTMLAttributes<HTMLDivElement>,
+  HTMLDivElement
+>;
 
 class Modal extends React.Component<AriaModalProps> {
-  dialogNode: undefined|Element;
+  dialogNode: undefined | Element;
 
   static defaultProps = {
     underlayProps: {},
-    dialogId: 'react-aria-modal-dialog',
+    dialogId: "react-aria-modal-dialog",
     underlayClickExits: true,
     escapeExits: true,
-    underlayColor: 'rgba(0,0,0,0.5)',
+    underlayColor: "rgba(0,0,0,0.5)",
     includeDefaultStyles: true,
     focusTrapPaused: false,
-    scrollDisabled: true
+    scrollDisabled: true,
   };
 
   constructor(props: AriaModalProps) {
     super(props);
     if (!this.props.titleText && !this.props.titleId) {
       throw new Error(
-        'react-aria-modal instances should have a `titleText` or `titleId`'
+        "react-aria-modal instances should have a `titleText` or `titleId`"
       );
     }
   }
@@ -208,7 +211,7 @@ class Modal extends React.Component<AriaModalProps> {
     const applicationNode = this.getApplicationNode();
     setTimeout(() => {
       if (applicationNode && applicationNode instanceof Element) {
-        applicationNode.setAttribute('aria-hidden', 'true');
+        applicationNode.setAttribute("aria-hidden", "true");
       }
     }, 0);
 
@@ -241,37 +244,39 @@ class Modal extends React.Component<AriaModalProps> {
     }
     const applicationNode = this.getApplicationNode();
     if (applicationNode && applicationNode instanceof Element) {
-      applicationNode.setAttribute('aria-hidden', 'false');
+      applicationNode.setAttribute("aria-hidden", "false");
     }
     this.removeKeyDownListener();
   }
 
   addKeyDownListener() {
     setTimeout(() => {
-      document.addEventListener('keydown', this.checkDocumentKeyDown);
+      document.addEventListener("keydown", this.checkDocumentKeyDown);
     });
   }
 
   removeKeyDownListener() {
     setTimeout(() => {
-      document.removeEventListener('keydown', this.checkDocumentKeyDown);
+      document.removeEventListener("keydown", this.checkDocumentKeyDown);
     });
   }
 
-  getApplicationNode = (): Node|Element|undefined => {
+  getApplicationNode = (): Node | Element | undefined => {
     if (this.props.getApplicationNode) return this.props.getApplicationNode();
     return this.props.applicationNode;
   };
 
   checkUnderlayClick = (event: React.MouseEvent) => {
     if (
-      (this.dialogNode && event.target instanceof Node && this.dialogNode.contains(event.target)) ||
+      (this.dialogNode &&
+        event.target instanceof Node &&
+        this.dialogNode.contains(event.target)) ||
       // If the click is on the scrollbar we don't want to close the modal.
-      (
-        event.target instanceof Element && event.target.ownerDocument &&
+      (event.target instanceof Element &&
+        event.target.ownerDocument &&
         (event.pageX > event.target.ownerDocument.documentElement.offsetWidth ||
-         event.pageY > event.target.ownerDocument.documentElement.offsetHeight)
-      )
+          event.pageY >
+            event.target.ownerDocument.documentElement.offsetHeight))
     )
       return;
     this.exit(event);
@@ -280,13 +285,13 @@ class Modal extends React.Component<AriaModalProps> {
   checkDocumentKeyDown = (event: KeyboardEvent) => {
     if (
       this.props.escapeExits &&
-      (event.key === 'Escape' || event.key === 'Esc' || event.keyCode === 27)
+      (event.key === "Escape" || event.key === "Esc" || event.keyCode === 27)
     ) {
       this.exit(event);
     }
   };
 
-  exit = (event: React.SyntheticEvent|Event) => {
+  exit = (event: React.SyntheticEvent | Event) => {
     if (this.props.onExit) {
       this.props.onExit(event);
     }
@@ -298,16 +303,16 @@ class Modal extends React.Component<AriaModalProps> {
     let style: React.CSSProperties = {};
     if (props.includeDefaultStyles) {
       style = {
-        position: 'fixed',
+        position: "fixed",
         top: 0,
         left: 0,
-        width: '100%',
-        height: '100%',
+        width: "100%",
+        height: "100%",
         zIndex: 1050,
-        overflowX: 'hidden',
-        overflowY: 'auto',
-        WebkitOverflowScrolling: 'touch',
-        textAlign: 'center'
+        overflowX: "hidden",
+        overflowY: "auto",
+        WebkitOverflowScrolling: "touch",
+        textAlign: "center",
       };
 
       if (props.underlayColor) {
@@ -315,7 +320,7 @@ class Modal extends React.Component<AriaModalProps> {
       }
 
       if (props.underlayClickExits) {
-        style.cursor = 'pointer';
+        style.cursor = "pointer";
       }
     }
 
@@ -328,7 +333,7 @@ class Modal extends React.Component<AriaModalProps> {
 
     const underlayProps: HTMLDivProps = {
       className: props.underlayClass,
-      style: style
+      style: style,
     };
 
     if (props.underlayClickExits) {
@@ -342,25 +347,25 @@ class Modal extends React.Component<AriaModalProps> {
     let verticalCenterStyle: React.CSSProperties = {};
     if (props.includeDefaultStyles) {
       verticalCenterStyle = {
-        display: 'inline-block',
-        height: '100%',
-        verticalAlign: 'middle'
+        display: "inline-block",
+        height: "100%",
+        verticalAlign: "middle",
       };
     }
 
     let dialogStyle: React.CSSProperties = {};
     if (props.includeDefaultStyles) {
       dialogStyle = {
-        display: 'inline-block',
-        textAlign: 'left',
+        display: "inline-block",
+        textAlign: "left",
         top: 0,
-        maxWidth: '100%',
-        cursor: 'default',
-        outline: props.focusDialog ? 0 : undefined
+        maxWidth: "100%",
+        cursor: "default",
+        outline: props.focusDialog ? 0 : undefined,
       };
 
       if (props.verticallyCenter) {
-        dialogStyle.verticalAlign = 'middle';
+        dialogStyle.verticalAlign = "middle";
         dialogStyle.top = 0;
       }
     }
@@ -373,19 +378,19 @@ class Modal extends React.Component<AriaModalProps> {
     }
 
     const dialogProps: HTMLDivProps = {
-      key: 'b',
+      key: "b",
       ref: (el: HTMLDivElement) => {
         this.dialogNode = el;
       },
-      role: props.alert ? 'alertdialog' : 'dialog',
+      role: props.alert ? "alertdialog" : "dialog",
       id: props.dialogId,
       className: props.dialogClass,
-      style: dialogStyle
+      style: dialogStyle,
     };
     if (props.titleId) {
-      dialogProps['aria-labelledby'] = props.titleId;
+      dialogProps["aria-labelledby"] = props.titleId;
     } else if (props.titleText) {
-      dialogProps['aria-label'] = props.titleText;
+      dialogProps["aria-label"] = props.titleText;
     }
     if (props.focusDialog) {
       dialogProps.tabIndex = -1;
@@ -398,17 +403,14 @@ class Modal extends React.Component<AriaModalProps> {
       }
     }
 
-    const childrenArray = [
-      <div {...dialogProps}>{props.children}</div>,
-    ];
+    const childrenArray = [<div {...dialogProps}>{props.children}</div>];
 
     if (props.verticallyCenter) {
-      childrenArray.unshift(
-        <div key="a" style={verticalCenterStyle} />
-      );
+      childrenArray.unshift(<div key="a" style={verticalCenterStyle} />);
     }
 
-    const focusTrapOptions: Partial<FocusTrapOptions> = props.focusTrapOptions || {};
+    const focusTrapOptions: Partial<FocusTrapOptions> =
+      props.focusTrapOptions || {};
     if (props.focusDialog || props.initialFocus) {
       focusTrapOptions.initialFocus = props.focusDialog
         ? `#${this.props.dialogId}`
@@ -417,7 +419,10 @@ class Modal extends React.Component<AriaModalProps> {
     focusTrapOptions.escapeDeactivates = props.escapeExits;
 
     return (
-      <ReactFocusTrap focusTrapOptions={focusTrapOptions} paused={props.focusTrapPaused}>
+      <ReactFocusTrap
+        focusTrapOptions={focusTrapOptions}
+        paused={props.focusTrapPaused}
+      >
         <div {...underlayProps}>{childrenArray}</div>
       </ReactFocusTrap>
     );
@@ -425,12 +430,12 @@ class Modal extends React.Component<AriaModalProps> {
 }
 
 type ReactAriaModal = React.ComponentType<AriaModalProps> & {
-  renderTo: (input: string|Element) => React.ComponentType<AriaModalProps>
+  renderTo: (input: string | Element) => React.ComponentType<AriaModalProps>;
 };
 
 const AriaModal = displace(Modal) as ReactAriaModal;
 
-AriaModal.renderTo = function(input) {
+AriaModal.renderTo = function (input) {
   return displace(Modal, { renderTo: input });
 };
 
