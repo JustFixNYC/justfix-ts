@@ -117,6 +117,15 @@ Common commands that will work on all packages include:
 Each package should also have a `CONTRIBUTING.md` that provides further
 guidance on developing it.
 
+### Code formatting
+
+We use [Prettier][] for all code formatting, and its formatting is enforced by our continous integration infrastructure.
+
+Checking code formatting can be done with `yarn prettier:check`, while automatically fixing all code formatting
+issues can be done with `yarn prettier:fix`.
+
+[Prettier]: https://prettier.io/
+
 ## Publishing packages
 
 Before publishing, you should make sure you are logged into `npm` as a
