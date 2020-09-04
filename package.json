@@ -2,11 +2,15 @@
   "private": true,
   "workspaces": ["packages/*"],
   "scripts": {
+    "prettier": "prettier",
+    "prettier:check": "prettier \"**/*.{ts,tsx}\" --check",
+    "prettier:fix": "prettier \"**/*.{ts,tsx}\" --write",
     "lerna": "lerna",
     "test": "lerna run test",
     "build": "lerna run build"
   },
   "devDependencies": {
-    "lerna": "3.17.0"
+    "lerna": "3.17.0",
+    "prettier": "2.1.1"
   }
 }
