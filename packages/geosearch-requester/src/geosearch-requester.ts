@@ -19,18 +19,18 @@ export type GeoSearchRequesterOptions = SearchRequesterOptions<
  * https://geosearch.planninglabs.nyc/docs/#autocomplete
  */
 export const GEO_AUTOCOMPLETE_URL =
-  'https://geosearch.planninglabs.nyc/v1/autocomplete';
+  "https://geosearch.planninglabs.nyc/v1/autocomplete";
 
 /**
  * The keys here were obtained experimentally, I'm not actually sure
  * if/where they are formally specified.
  */
 export enum GeoSearchBoroughGid {
-  Manhattan = 'whosonfirst:borough:1',
-  Bronx = 'whosonfirst:borough:2',
-  Brooklyn = 'whosonfirst:borough:3',
-  Queens = 'whosonfirst:borough:4',
-  StatenIsland = 'whosonfirst:borough:5',
+  Manhattan = "whosonfirst:borough:1",
+  Bronx = "whosonfirst:borough:2",
+  Brooklyn = "whosonfirst:borough:3",
+  Queens = "whosonfirst:borough:4",
+  StatenIsland = "whosonfirst:borough:5",
 }
 
 /**

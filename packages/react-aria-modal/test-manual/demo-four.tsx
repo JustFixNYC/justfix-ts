@@ -1,13 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import AriaModal from '../src/react-aria-modal';
+import React from "react";
+import ReactDOM from "react-dom";
+import AriaModal from "../src/react-aria-modal";
 
 class DemoFour extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
 
     this.state = {
-      modalActive: false
+      modalActive: false,
     };
 
     this.activateModal = this.activateModal.bind(this);
@@ -25,28 +25,19 @@ class DemoFour extends React.Component<any, any> {
   render() {
     return (
       <div>
-        <button onClick={this.activateModal}>
-          activate modal
-        </button>
+        <button onClick={this.activateModal}>activate modal</button>
         <AriaModal
           titleText="demo four"
           onExit={this.deactivateModal}
           initialFocus="#demo-four-deactivate"
           mounted={this.state.modalActive}
-          underlayStyle={{ paddingTop: '2em' }}
+          underlayStyle={{ paddingTop: "2em" }}
         >
           <div id="demo-four-modal" className="modal">
             <div className="modal-body">
               <p>
-                Here is a modal
-                {' '}
-                <a href="#">with</a>
-                {' '}
-                <a href="#">some</a>
-                {' '}
-                <a href="#">focusable</a>
-                {' '}
-                parts.
+                Here is a modal <a href="#">with</a> <a href="#">some</a>{" "}
+                <a href="#">focusable</a> parts.
               </p>
             </div>
             <footer className="modal-footer">
@@ -61,4 +52,4 @@ class DemoFour extends React.Component<any, any> {
   }
 }
 
-ReactDOM.render(<DemoFour />, document.getElementById('demo-four'));
+ReactDOM.render(<DemoFour />, document.getElementById("demo-four"));

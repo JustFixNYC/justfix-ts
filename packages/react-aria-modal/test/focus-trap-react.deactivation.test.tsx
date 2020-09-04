@@ -1,14 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import TestUtils from 'react-dom/test-utils';
-import { ReactFocusTrap as FocusTrap } from '../src/focus-trap-react';
+import React from "react";
+import ReactDOM from "react-dom";
+import TestUtils from "react-dom/test-utils";
+import { ReactFocusTrap as FocusTrap } from "../src/focus-trap-react";
 
-describe('deactivation', () => {
+describe("deactivation", () => {
   let domContainer: any;
   const createMockFocusTrap = () => ({
     activate: jest.fn(),
     deactivate: jest.fn(),
-    pause: jest.fn()
+    pause: jest.fn(),
   });
   let mockFocusTrap = createMockFocusTrap();
   let mockCreateFocusTrap: any;
@@ -16,7 +16,7 @@ describe('deactivation', () => {
   beforeEach(() => {
     mockFocusTrap = createMockFocusTrap();
     mockCreateFocusTrap = jest.fn(() => mockFocusTrap);
-    domContainer = document.createElement('div');
+    domContainer = document.createElement("div");
     document.body.appendChild(domContainer);
   });
 
@@ -25,10 +25,10 @@ describe('deactivation', () => {
     document.body.removeChild(domContainer);
   });
 
-  test('deactivation', () => {
+  test("deactivation", () => {
     class TestZone extends React.Component {
       state = {
-        trapActive: true
+        trapActive: true,
       };
 
       deactivateTrap = () => {
@@ -47,9 +47,7 @@ describe('deactivation', () => {
               active={this.state.trapActive}
             >
               <div>
-                <button>
-                  something special
-                </button>
+                <button>something special</button>
               </div>
             </FocusTrap>
           </div>
@@ -66,10 +64,10 @@ describe('deactivation', () => {
     expect(mockFocusTrap.deactivate).toHaveBeenCalledTimes(1);
   });
 
-  test('deactivation respects `returnFocusOnDeactivate` option', () => {
+  test("deactivation respects `returnFocusOnDeactivate` option", () => {
     class TestZone extends React.Component {
       state = {
-        trapActive: true
+        trapActive: true,
       };
 
       deactivateTrap = () => {
@@ -83,15 +81,13 @@ describe('deactivation', () => {
               deactivate
             </button>
             <FocusTrap
-              ref={(component) => (this as any).trap = component}
+              ref={(component) => ((this as any).trap = component)}
               _createFocusTrap={mockCreateFocusTrap}
               active={this.state.trapActive}
               focusTrapOptions={{ returnFocusOnDeactivate: true }}
             >
               <div>
-                <button>
-                  something special
-                </button>
+                <button>something special</button>
               </div>
             </FocusTrap>
           </div>
@@ -106,13 +102,15 @@ describe('deactivation', () => {
 
     TestUtils.Simulate.click(ReactDOM.findDOMNode(zone.refs.trigger) as any);
 
-    expect(zone.trap.focusTrap.deactivate).toHaveBeenCalledWith({ returnFocus: true });
+    expect(zone.trap.focusTrap.deactivate).toHaveBeenCalledWith({
+      returnFocus: true,
+    });
   });
 
-  test('deactivation by dismount', () => {
+  test("deactivation by dismount", () => {
     class TestZone extends React.Component {
       state = {
-        trapActive: true
+        trapActive: true,
       };
 
       deactivateTrap = () => {
@@ -120,13 +118,13 @@ describe('deactivation', () => {
       };
 
       render() {
-        const trap = this.state.trapActive
-          ? <FocusTrap _createFocusTrap={mockCreateFocusTrap} ref="trap">
-              <button>
-                something special
-              </button>
-            </FocusTrap>
-          : false;
+        const trap = this.state.trapActive ? (
+          <FocusTrap _createFocusTrap={mockCreateFocusTrap} ref="trap">
+            <button>something special</button>
+          </FocusTrap>
+        ) : (
+          false
+        );
 
         return (
           <div>

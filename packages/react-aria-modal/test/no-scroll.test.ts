@@ -1,5 +1,4 @@
-import * as noScroll from '../src/no-scroll';
-
+import * as noScroll from "../src/no-scroll";
 
 test("it does not explode", () => {
   window.scroll = () => {};

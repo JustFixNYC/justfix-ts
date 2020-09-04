@@ -1,13 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import AriaModal from '../src/react-aria-modal';
+import React from "react";
+import ReactDOM from "react-dom";
+import AriaModal from "../src/react-aria-modal";
 
 class DemoFive extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
 
     this.state = {
-      modalActive: false
+      modalActive: false,
     };
 
     this.activateModal = this.activateModal.bind(this);
@@ -22,12 +22,12 @@ class DemoFive extends React.Component<any, any> {
   deactivateModal = () => {
     this.setState(
       {
-        modalHasEntered: false
+        modalHasEntered: false,
       },
       () => {
         setTimeout(() => {
           this.setState({
-            modalActive: false
+            modalActive: false,
           });
         }, 300);
       }
@@ -39,17 +39,15 @@ class DemoFive extends React.Component<any, any> {
   };
 
   render() {
-    let dialogContentClass = 'modal modal--animated';
-    let underlayClass = 'underlay';
+    let dialogContentClass = "modal modal--animated";
+    let underlayClass = "underlay";
     if (this.state.modalHasEntered) {
-      dialogContentClass += ' has-entered';
-      underlayClass += ' has-entered';
+      dialogContentClass += " has-entered";
+      underlayClass += " has-entered";
     }
     return (
       <div>
-        <button onClick={this.activateModal}>
-          activate modal
-        </button>
+        <button onClick={this.activateModal}>activate modal</button>
         <AriaModal
           titleText="demo five"
           onEnter={this.onModalEnter}
@@ -58,20 +56,13 @@ class DemoFive extends React.Component<any, any> {
           mounted={this.state.modalActive}
           underlayColor={false}
           underlayClass={underlayClass}
-          underlayStyle={{ paddingTop: '2em' }}
+          underlayStyle={{ paddingTop: "2em" }}
         >
           <div id="demo-five-modal" className={dialogContentClass}>
             <div className="modal-body">
               <p>
-                Here is a modal
-                {' '}
-                <a href="#">with</a>
-                {' '}
-                <a href="#">some</a>
-                {' '}
-                <a href="#">focusable</a>
-                {' '}
-                parts.
+                Here is a modal <a href="#">with</a> <a href="#">some</a>{" "}
+                <a href="#">focusable</a> parts.
               </p>
             </div>
             <footer className="modal-footer">
@@ -86,4 +77,4 @@ class DemoFive extends React.Component<any, any> {
   }
 }
 
-ReactDOM.render(<DemoFive />, document.getElementById('demo-five'));
+ReactDOM.render(<DemoFive />, document.getElementById("demo-five"));
