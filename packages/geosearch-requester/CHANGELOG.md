@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.3.0 (2020-09-11)
+
+* Exposed the `postalcode` property for `GeoSearchResults`.
+* Added a convenience `geoSearch()` function.
+
 ## 0.2.0 (2020-09-03)
 
 * Added a new optional constructor parameter called `customGeoAutocompleteUrl`.
