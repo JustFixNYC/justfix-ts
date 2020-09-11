@@ -80,6 +80,13 @@ export interface GeoSearchProperties {
    * property, e.g. "3002920026".
    */
   pad_bbl: string;
+
+  /**
+   * The zip code, e.g. "11201". Note that in extremely rare
+   * cases, this is undefined, such as (at the time of this writing)
+   * for "276 M L K Boulevard, Manhattan".
+   */
+  postalcode: string | undefined;
 }
 
 /**
