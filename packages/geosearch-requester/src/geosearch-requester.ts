@@ -104,3 +104,26 @@ export class GeoSearchRequester extends SearchRequester<GeoSearchResults> {
     }?text=${encodeURIComponent(query)}`;
   }
 }
+
+/**
+ * A convenience function for making NYC Planning Labs GeoSearch
+ * requests outside the context of an autocomplete UI: provide
+ * an address, and this function will return results.
+ */
+export function geoSearch(
+  address: string,
+  options?: Omit<
+    GeoSearchRequesterOptions,
+    "onError" | "onResults" | "throttleMs"
+  >
+): Promise<GeoSearchResults> {
+  return new Promise((resolve, reject) => {
+    const req = new GeoSearchRequester({
+      ...options,
+      onError: reject,
+      onResults: resolve,
+      throttleMs: 0,
+    });
+    req.changeSearchRequest(address);
+  });
+}
