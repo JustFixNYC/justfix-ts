@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.3.1 (2020-09-11)
+
+* Make this module work in Node, hopefully.
+
 ## 0.3.0 (2020-09-11)
 
 * Exposed the `postalcode` property for `GeoSearchResults`.

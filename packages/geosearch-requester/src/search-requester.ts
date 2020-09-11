@@ -93,7 +93,12 @@ export class SearchHttpStatusError extends Error {
 export abstract class SearchRequester<SearchResults> {
   private requestId: number;
   private abortController?: AbortController;
-  private throttleTimeout: number | null;
+
+  // We'd set this to something more specific than 'any' but we
+  // want this code to work both in Node and the browser, and setTimeout()
+  // has different return values depending on the environment. Sigh.
+  private throttleTimeout: any | null;
+
   private createAbortController: AbortControllerFactory;
   private fetch: typeof window.fetch;
 
@@ -174,7 +179,7 @@ export abstract class SearchRequester<SearchResults> {
    */
   private resetSearchRequest() {
     if (this.throttleTimeout !== null) {
-      window.clearTimeout(this.throttleTimeout);
+      clearTimeout(this.throttleTimeout);
       this.throttleTimeout = null;
     }
     this.requestId++;
@@ -191,7 +196,7 @@ export abstract class SearchRequester<SearchResults> {
   changeSearchRequest(value: string): boolean {
     this.resetSearchRequest();
     if (value.length > 0) {
-      this.throttleTimeout = window.setTimeout(() => {
+      this.throttleTimeout = setTimeout(() => {
         this.fetchResultsForLatestRequest(value)
           .catch(this.options.onError)
           .then((results) => {
@@ -199,7 +204,7 @@ export abstract class SearchRequester<SearchResults> {
               this.options.onResults(results);
             }
           });
-      }, this.options.throttleMs || DEFAULT_THROTTLE_MS);
+      }, this.options.throttleMs || DEFAULT_THROTTLE_MS) as any;
       return true;
     }
     return false;
