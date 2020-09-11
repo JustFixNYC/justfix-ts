@@ -80,6 +80,13 @@ export interface GeoSearchProperties {
    * property, e.g. "3002920026".
    */
   pad_bbl: string;
+
+  /**
+   * The zip code, e.g. "11201". Note that in extremely rare
+   * cases, this is undefined, such as (at the time of this writing)
+   * for "276 M L K Boulevard, Manhattan".
+   */
+  postalcode: string | undefined;
 }
 
 /**
@@ -96,4 +103,27 @@ export class GeoSearchRequester extends SearchRequester<GeoSearchResults> {
       this.options.customGeoAutocompleteUrl || GEO_AUTOCOMPLETE_URL
     }?text=${encodeURIComponent(query)}`;
   }
+}
+
+/**
+ * A convenience function for making NYC Planning Labs GeoSearch
+ * requests outside the context of an autocomplete UI: provide
+ * an address, and this function will return results.
+ */
+export function geoSearch(
+  address: string,
+  options?: Omit<
+    GeoSearchRequesterOptions,
+    "onError" | "onResults" | "throttleMs"
+  >
+): Promise<GeoSearchResults> {
+  return new Promise((resolve, reject) => {
+    const req = new GeoSearchRequester({
+      ...options,
+      onError: reject,
+      onResults: resolve,
+      throttleMs: 0,
+    });
+    req.changeSearchRequest(address);
+  });
 }
