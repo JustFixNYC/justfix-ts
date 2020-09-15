@@ -89,6 +89,14 @@ Gatsby also always transpiles `node_modules`, at least for production. See
 [justfix-ts#1]: https://github.com/JustFixNYC/justfix-ts/pull/1
 [justfix-ts#3]: https://github.com/JustFixNYC/justfix-ts/pull/3
 
+### @babel/register
+
+This module ignores `node_modules` by default, so you will need to
+explicitly tell it not to; the easiest way to do this is by passing
+`ignore: []` to its options, as described in the [`@babel/register` docs][].
+
+[`@babel/register` docs]: https://babeljs.io/docs/en/babel-register#ignores-node_modules-by-default
+
 ## Developing packages
 
 Before working on any individual packages, go to the root of the repository and
