@@ -17,33 +17,31 @@ export const CovidMoratoriumBanner: React.FC<{ locale?: string }> = ({
       JustFix.nyc está operativo, y hemos adaptado nuestros productos a las
       normas establecidas durante la crisis de COVID-19. Todavía recomendamos
       que se tomen todas las precauciones posibles para mantenerse sanos durante
-      esta crisis de salud pública. Gracias al poder de la organización de
-      inquilinos, los inquilinos no pueden ser desalojados por ninguna razón
-      hasta el 1 de octubre. Visita las{" "}
+      esta crisis de salud pública. La organización de inquilinos por la ciudad
+      está luchando para mantener la gente en sus casas. Visita{" "}
       <a
-        href="https://docs.google.com/document/d/1uzT1lduZAzNLpy_WxSOU1oSOTOPs0YrWekzLd8o6tAs"
+        href="https://www.righttocounselnyc.org/organizing_covid19"
         target="_blank"
         rel="noopener noreferrer"
       >
-        Preguntas Más Frecuentes sobre la Moratoria de Desalojo del Right to
-        Council
+        Right to Counsel (en inglés)
       </a>{" "}
       para obtener más información.
     </>
   ) : (
     <>
       <b>COVID-19 Update: </b>
-      JustFix.nyc is operating, and has adapted our products to match
-      preliminary rules put in place during the COVID-19 crisis. We recommend
-      you take full precautions to stay safe during this public health crisis.
-      Thanks to tenant organizing during this time, renters cannot be evicted
-      for any reason until October 1st. Visit{" "}
+      JustFix.nyc is operating, and has adapted our products to match rules put
+      in place during the COVID-19 crisis. We recommend you take full
+      precautions to stay safe during this public health crisis. Tenant leaders
+      and organizers around the city are fighting to keep people in their homes.
+      Visit{" "}
       <a
-        href="https://www.righttocounselnyc.org/ny_eviction_moratorium_faq"
+        href="https://www.righttocounselnyc.org/organizing_covid19"
         target="_blank"
         rel="noopener noreferrer"
       >
-        Right to Council’s Eviction Moratorium FAQs
+        Right to Counsel
       </a>{" "}
       to learn more.
     </>
