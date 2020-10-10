@@ -17,14 +17,14 @@ export const CovidMoratoriumBanner: React.FC<{ locale?: string }> = ({
       JustFix.nyc está operativo, y hemos adaptado nuestros productos a las
       normas establecidas durante la crisis de COVID-19. Todavía recomendamos
       que se tomen todas las precauciones posibles para mantenerse sanos durante
-      esta crisis de salud pública. La organización de inquilinos por la ciudad
-      está luchando para mantener la gente en sus casas. Visita{" "}
+      esta crisis de salud pública. Los organizadores de inquilinos de la ciudad
+      luchan por mantener la gente en sus casas. Visita{" "}
       <a
         href="https://www.righttocounselnyc.org/organizing_covid19"
         target="_blank"
         rel="noopener noreferrer"
       >
-        Right to Counsel (en inglés)
+        Coalición del Derecho a Representación Legal (en inglés)
       </a>{" "}
       para obtener más información.
     </>
@@ -41,7 +41,7 @@ export const CovidMoratoriumBanner: React.FC<{ locale?: string }> = ({
         target="_blank"
         rel="noopener noreferrer"
       >
-        Right to Counsel
+        Right to Counsel Coalition
       </a>{" "}
       to learn more.
     </>
