@@ -24,7 +24,7 @@ export const CovidMoratoriumBanner: React.FC<{ locale?: string }> = ({
         target="_blank"
         rel="noopener noreferrer"
       >
-        Coalición del Derecho a Representación Legal (en inglés)
+        Coalición del Derecho a Representación Legal
       </a>{" "}
       para obtener más información.
     </>
