@@ -14,11 +14,9 @@ export const CovidMoratoriumBanner: React.FC<{ locale?: string }> = ({
   return locale === "es" ? (
     <>
       <b>Actualización COVID-19: </b>
-      JustFix.nyc está operativo, y hemos adaptado nuestros productos a las
-      normas establecidas durante la crisis de COVID-19. Todavía recomendamos
-      que se tomen todas las precauciones posibles para mantenerse sanos durante
-      esta crisis de salud pública. Los organizadores de inquilinos de la ciudad
-      luchan por mantener la gente en sus casas. Visita{" "}
+      Recomendamos que se tomen todas las precauciones posibles para mantenerse
+      sanos durante esta crisis de salud pública. Los organizadores de
+      inquilinos de la ciudad luchan por mantener la gente en sus casas. Visita{" "}
       <a
         href="https://d3n8a8pro7vhmx.cloudfront.net/righttocounselnyc/pages/191/attachments/original/1603843954/ESP_-_Eviction_Moratorium_FAQ_10.2020_.pdf?1603843954"
         target="_blank"
@@ -31,11 +29,9 @@ export const CovidMoratoriumBanner: React.FC<{ locale?: string }> = ({
   ) : (
     <>
       <b>COVID-19 Update: </b>
-      JustFix.nyc is operating, and has adapted our products to match rules put
-      in place during the COVID-19 crisis. We recommend you take full
-      precautions to stay safe during this public health crisis. Tenant leaders
-      and organizers around the city are fighting to keep people in their homes.
-      Visit{" "}
+      We recommend you take full precautions to stay safe during this public
+      health crisis. Tenant leaders and organizers around the city are fighting
+      to keep people in their homes. Visit{" "}
       <a
         href="https://www.righttocounselnyc.org/ny_eviction_moratorium_faq"
         target="_blank"
