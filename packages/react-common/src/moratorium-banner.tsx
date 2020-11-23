@@ -14,10 +14,9 @@ export const CovidMoratoriumBanner: React.FC<{ locale?: string }> = ({
   return locale === "es" ? (
     <>
       <b>Actualización COVID-19: </b>
-      Todavía recomendamos que se tomen todas las precauciones posibles para
-      mantenerse sanos durante esta crisis de salud pública. Los organizadores
-      de inquilinos de la ciudad luchan por mantener la gente en sus casas.
-      Visita{" "}
+      Recomendamos que se tomen todas las precauciones posibles para mantenerse
+      sanos durante esta crisis de salud pública. Los organizadores de
+      inquilinos de la ciudad luchan por mantener la gente en sus casas. Visita{" "}
       <a
         href="https://d3n8a8pro7vhmx.cloudfront.net/righttocounselnyc/pages/191/attachments/original/1603843954/ESP_-_Eviction_Moratorium_FAQ_10.2020_.pdf?1603843954"
         target="_blank"
