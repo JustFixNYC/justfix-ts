@@ -23,7 +23,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "prepublish": "yarn build",
-    "build": "tsc",
+    "build": "tsc && tsc --build tsconfig.commonjs.json",
     "watch": "tsc --watch"
   }
 }

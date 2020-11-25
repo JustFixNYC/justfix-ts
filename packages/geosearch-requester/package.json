@@ -27,7 +27,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "prepublish": "yarn build",
-    "build": "tsc && rollup -c",
+    "build": "tsc && tsc --build tsconfig.commonjs.json && rollup -c",
     "watch": "concurrently --kill-others \"tsc --watch --preserveWatchOutput\" \"rollup -c --watch\""
   }
 }
