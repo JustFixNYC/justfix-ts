@@ -18,7 +18,7 @@ export const CovidMoratoriumBanner: React.FC<{ locale?: string }> = ({
       sanos durante esta crisis de salud pública. Los organizadores de
       inquilinos de la ciudad luchan por mantener la gente en sus casas. Visita{" "}
       <a
-        href="https://d3n8a8pro7vhmx.cloudfront.net/righttocounselnyc/pages/191/attachments/original/1603843954/ESP_-_Eviction_Moratorium_FAQ_10.2020_.pdf?1603843954"
+        href="https://www.righttocounselnyc.org/protecciones_contra_desalojos"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -33,7 +33,7 @@ export const CovidMoratoriumBanner: React.FC<{ locale?: string }> = ({
       health crisis. Tenant leaders and organizers around the city are fighting
       to keep people in their homes. Visit{" "}
       <a
-        href="https://www.righttocounselnyc.org/ny_eviction_moratorium_faq"
+        href="https://www.righttocounselnyc.org/eviction_protections_during_covid"
         target="_blank"
         rel="noopener noreferrer"
       >
