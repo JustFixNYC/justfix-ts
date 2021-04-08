@@ -6,9 +6,12 @@
  * statically verify that something isn't null (e.g. due to the limitations
  * of typings we didn't write) but are sure it won't be in practice.
  */
-export function assertNotNull<T>(thing: T | null): T | never {
+export function assertNotNull<T>(
+  thing: T | null,
+  msg: string = "Assertion failure, expected argument to not be null!"
+): T | never {
   if (thing === null) {
-    throw new Error("Assertion failure, expected argument to not be null!");
+    throw new Error(msg);
   }
   return thing;
 }
@@ -21,11 +24,12 @@ export function assertNotNull<T>(thing: T | null): T | never {
  * statically verify that something isn't undefined (e.g. due to the limitations
  * of typings we didn't write) but are sure it won't be in practice.
  */
-export function assertNotUndefined<T>(thing: T | undefined): T | never {
+export function assertNotUndefined<T>(
+  thing: T | undefined,
+  msg: string = "Assertion failure, expected argument to not be undefined!"
+): T | never {
   if (thing === undefined) {
-    throw new Error(
-      "Assertion failure, expected argument to not be undefined!"
-    );
+    throw new Error(msg);
   }
   return thing;
 }
