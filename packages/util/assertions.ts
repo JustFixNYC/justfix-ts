@@ -6,7 +6,7 @@
  * statically verify that something isn't null (e.g. due to the limitations
  * of typings we didn't write) but are sure it won't be in practice.
  */
- export function assertNotNull<T>(
+export function assertNotNull<T>(
   thing: T | null,
   msg: string = "Assertion failure, expected argument to not be null!"
 ): T | never {
