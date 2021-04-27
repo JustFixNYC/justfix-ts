@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 0.3.0 (2021-04-27)
 
 Add an optional custom message to assertion helpers `assertNotUndefined` and `assertNotNull`.
 
