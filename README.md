@@ -136,6 +136,10 @@ issues can be done with `yarn prettier:fix`.
 
 ## Publishing packages
 
+Make sure you've updated the Changelog to reflect the changes you made.
+Increment the minor version if it's a backwards-compatible change, and the
+major version of it's a breaking change.
+
 Before publishing, you should make sure you are logged into `npm` as a
 user with publish access to the `@justfixnyc` organization/scope.  Use
 the following to check if you are logged in:
@@ -149,5 +153,10 @@ To publish all changed packages, go to the root of the repository and run:
 ```
 yarn lerna publish
 ```
+
+It may ask you to select a new version for some of the packages in the repo.
+If you did not make a change to the package, select `prepatch`.
+For the packages you did change, select the version number you chose in the
+Changelog.
 
 [monorepo]: https://en.wikipedia.org/wiki/Monorepo
