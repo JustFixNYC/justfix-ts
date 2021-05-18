@@ -13,33 +13,25 @@ export const CovidMoratoriumBanner: React.FC<{ locale?: string }> = ({
 }) => {
   return locale === "es" ? (
     <>
-      <b>Actualización COVID-19: </b>
-      Recomendamos que se tomen todas las precauciones posibles para mantenerse
-      sanos durante esta crisis de salud pública. Los organizadores de
-      inquilinos de la ciudad luchan por mantener la gente en sus casas. Visita{" "}
+      ¡Protecciones de desalojo extendidas hasta el 31 de agosto!{" "}
       <a
-        href="https://www.righttocounselnyc.org/protecciones_contra_desalojos"
+        href="https://www.evictionfreeny.org/es"
         target="_blank"
         rel="noopener noreferrer"
       >
-        Coalición del Derecho a Representación Legal
-      </a>{" "}
-      para obtener más información.
+        Protéjete aquí
+      </a>
     </>
   ) : (
     <>
-      <b>COVID-19 Update: </b>
-      We recommend you take full precautions to stay safe during this public
-      health crisis. Tenant leaders and organizers around the city are fighting
-      to keep people in their homes. Visit{" "}
+      Eviction protections extended until August 31!{" "}
       <a
-        href="https://www.righttocounselnyc.org/eviction_protections_during_covid"
+        href="https://www.evictionfreeny.org/en"
         target="_blank"
         rel="noopener noreferrer"
       >
-        Right to Counsel Coalition
-      </a>{" "}
-      to learn more.
+        Protect yourself here
+      </a>
     </>
   );
 };
