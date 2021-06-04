@@ -13,24 +13,26 @@ export const CovidMoratoriumBanner: React.FC<{ locale?: string }> = ({
 }) => {
   return locale === "es" ? (
     <>
-      DEVELOPING: Housing Court is preventing tenants from suing their landlords through JustFix.{" "}
+      DESARROLLANDO: La Corte de Viviendas está impidiendo que los inquilinos
+      demanden a sus dueños a través de JustFix.{" "}
       <a
-        href=""
+        href="https://justfixnyc.medium.com/housing-court-blocks-tenants-from-suing-their-landlords-d7b9e3629a32"
         target="_blank"
         rel="noopener noreferrer"
       >
-        Learn more here
+        Más información aquí
       </a>
     </>
   ) : (
     <>
-      DEVELOPING: Housing Court is preventing tenants from suing their landlords through JustFix.{" "}
+      DEVELOPING: Housing Court is blocking tenants from suing their landlords
+      through JustFix.{" "}
       <a
-        href=""
+        href="https://justfixnyc.medium.com/housing-court-blocks-tenants-from-suing-their-landlords-d7b9e3629a32"
         target="_blank"
         rel="noopener noreferrer"
       >
-       Learn more here
+        Learn more here
       </a>
     </>
   );
