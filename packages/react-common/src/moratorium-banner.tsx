@@ -13,24 +13,24 @@ export const CovidMoratoriumBanner: React.FC<{ locale?: string }> = ({
 }) => {
   return locale === "es" ? (
     <>
-      ¡Protecciones de desalojo extendidas hasta el 31 de agosto!{" "}
+      DEVELOPING: Housing Court is preventing tenants from suing their landlords through JustFix.{" "}
       <a
-        href="https://www.evictionfreeny.org/es"
+        href=""
         target="_blank"
         rel="noopener noreferrer"
       >
-        Protéjete aquí
+        Learn more here
       </a>
     </>
   ) : (
     <>
-      Eviction protections extended until August 31!{" "}
+      DEVELOPING: Housing Court is preventing tenants from suing their landlords through JustFix.{" "}
       <a
-        href="https://www.evictionfreeny.org/en"
+        href=""
         target="_blank"
         rel="noopener noreferrer"
       >
-        Protect yourself here
+       Learn more here
       </a>
     </>
   );
