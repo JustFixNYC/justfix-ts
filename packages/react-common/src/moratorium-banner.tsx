@@ -20,7 +20,7 @@ export const CovidMoratoriumBanner: React.FC<{ locale?: string }> = ({
         target="_blank"
         rel="noopener noreferrer"
       >
-        Más información aquí
+        Más información
       </a>
     </>
   ) : (
@@ -32,7 +32,7 @@ export const CovidMoratoriumBanner: React.FC<{ locale?: string }> = ({
         target="_blank"
         rel="noopener noreferrer"
       >
-        Learn more here
+        Learn more
       </a>
     </>
   );
