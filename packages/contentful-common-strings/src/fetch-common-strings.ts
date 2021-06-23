@@ -8,12 +8,14 @@ export type ContentfulCommonStringsConfig = {
   accessToken: string;
 };
 
-export const CONFIG_DEFAULTS: ContentfulCommonStringsConfig = {
+const DEFAULTS: ContentfulCommonStringsConfig = {
   origin: "https://cdn.contentful.com",
   tag: "common",
   spaceId: "markmr2gi204",
   accessToken: "Fli_OMdKgUFw6tEX3uv6HqvptuG6A6jn9bZVPlHZj8E",
 };
+
+export const DEFAULT_CONTENTFUL_COMMON_STRINGS_CONFIG = DEFAULTS;
 
 function toCommonStringsMap(raw: any): ContentfulCommonStringsMapping {
   const result: ContentfulCommonStringsMapping = {};
@@ -33,7 +35,7 @@ function toCommonStringsMap(raw: any): ContentfulCommonStringsMapping {
 function getContentfulEntriesURL(
   options?: Partial<ContentfulCommonStringsConfig>
 ): string {
-  const config = { ...CONFIG_DEFAULTS, ...options };
+  const config = { ...DEFAULTS, ...options };
   const search = new URLSearchParams();
   search.append("locale", "*");
   search.append("metadata.tags.sys.id[in]", config.tag);

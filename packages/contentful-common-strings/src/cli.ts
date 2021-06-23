@@ -2,7 +2,7 @@ import fs from "fs";
 import yargs from "yargs";
 import {
   fetchContentfulCommonStrings,
-  CONFIG_DEFAULTS,
+  DEFAULT_CONTENTFUL_COMMON_STRINGS_CONFIG as CONFIG_DEFAULTS,
 } from "./fetch-common-strings.js";
 
 export function main() {
