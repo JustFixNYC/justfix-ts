@@ -39,7 +39,16 @@ const cliConfig = {
     clearScreen: false,
   },
   plugins: [resolve({ preferBuiltins: true }), commonjs()],
-  external: ["stream", "http", "url", "https", "zlib", "cross-fetch", "yargs"],
+  external: [
+    "stream",
+    "http",
+    "url",
+    "https",
+    "zlib",
+    "cross-fetch",
+    "yargs",
+    "fs",
+  ],
 };
 
 export default [manualTestConfig, cliConfig];

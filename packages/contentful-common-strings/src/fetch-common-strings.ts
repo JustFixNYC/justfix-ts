@@ -1,14 +1,14 @@
 import { ContentfulCommonStringsMapping } from ".";
 import fetch from "cross-fetch";
 
-type ContentfulCommonStringsConfig = {
+export type ContentfulCommonStringsConfig = {
   origin: string;
   tag: string;
   spaceId: string;
   accessToken: string;
 };
 
-const CONFIG_DEFAULTS: ContentfulCommonStringsConfig = {
+export const CONFIG_DEFAULTS: ContentfulCommonStringsConfig = {
   origin: "https://cdn.contentful.com",
   tag: "common",
   spaceId: "markmr2gi204",
