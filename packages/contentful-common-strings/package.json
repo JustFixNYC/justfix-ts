@@ -16,6 +16,7 @@
     "@babel/preset-env": "7.6.3",
     "@babel/preset-react": "^7.9.4",
     "@babel/preset-typescript": "7.6.0",
+    "@contentful/rich-text-react-renderer": "^15.0.0",
     "@justfixnyc/util": "^0.3.0",
     "@types/jest": "24.0.15",
     "@types/react": "^16.9.26",
@@ -29,9 +30,6 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-replace": "^2.2.0",
     "typescript": "3.6.4"
-  },
-  "peerDependencies": {
-    "react": "^16.0.0"
   },
   "scripts": {
     "cli": "node bin/cli.js",

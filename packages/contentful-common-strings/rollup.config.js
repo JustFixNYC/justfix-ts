@@ -15,7 +15,7 @@ const manualTestConfig = {
     clearScreen: false,
   },
   plugins: [
-    resolve(),
+    resolve({ browser: true }),
     commonjs({
       include: "../../node_modules/**",
     }),
