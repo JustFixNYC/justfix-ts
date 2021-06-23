@@ -4,6 +4,7 @@
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "license": "MIT",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/justfixnyc/justfix-ts/tree/master/packages/contentful-common-strings"
@@ -34,6 +35,7 @@
     "react": "^16.0.0"
   },
   "scripts": {
+    "cli": "node dist/src/cli.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "prepublish": "yarn build",
@@ -41,6 +43,7 @@
     "watch": "concurrently --kill-others \"tsc --watch --preserveWatchOutput\" \"rollup -c --watch\""
   },
   "dependencies": {
-    "@contentful/rich-text-types": "^15.0.0"
+    "@contentful/rich-text-types": "^15.0.0",
+    "cross-fetch": "^3.1.4"
   }
 }
