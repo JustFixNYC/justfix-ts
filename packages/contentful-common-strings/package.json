@@ -41,6 +41,9 @@
     "build": "tsc && rollup -c",
     "watch": "concurrently --kill-others \"tsc --watch --preserveWatchOutput\" \"rollup -c --watch\""
   },
+  "bin": {
+    "contentful-common-strings": "./bin/cli.js"
+  },
   "dependencies": {
     "@contentful/rich-text-types": "^15.0.0",
     "cross-fetch": "^3.1.4"
