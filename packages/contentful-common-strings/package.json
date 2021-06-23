@@ -22,6 +22,7 @@
     "@types/react": "^16.9.26",
     "@types/react-dom": "^16.9.5",
     "concurrently": "^5.0.0",
+    "http-server": "^0.12.3",
     "jest": "24.9.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
@@ -37,7 +38,7 @@
     "test:watch": "jest --watch",
     "prepublish": "yarn build",
     "build": "tsc && rollup -c",
-    "watch": "concurrently --kill-others \"tsc --watch --preserveWatchOutput\" \"rollup -c --watch\""
+    "watch": "concurrently --kill-others \"tsc --watch --preserveWatchOutput\" \"rollup -c --watch\" \"http-server test-manual\""
   },
   "bin": {
     "contentful-common-strings": "./bin/cli.js"
