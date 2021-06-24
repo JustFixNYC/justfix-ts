@@ -73,7 +73,7 @@ function getConfigFromQuerystring() {
 
   for (let key of CONFIG_KEYS) {
     const value = search.get(key);
-    if (value) {
+    if (value !== null) {
       config[key] = value;
     }
   }
