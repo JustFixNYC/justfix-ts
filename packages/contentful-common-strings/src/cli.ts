@@ -67,5 +67,6 @@ export function main() {
         }
       }
     )
-    .help().argv;
+    .help()
+    .demandCommand().argv;
 }
