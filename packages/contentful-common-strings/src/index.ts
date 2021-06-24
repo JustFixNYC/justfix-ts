@@ -1,7 +1,16 @@
 import { Document as ContentfulDocument } from "@contentful/rich-text-types";
+export {
+  ContentfulCommonStringsConfig,
+  DEFAULT_CONTENTFUL_COMMON_STRINGS_CONFIG,
+  fetchContentfulCommonStrings,
+} from "./fetch-common-strings";
+
+export type ContentfulCommonStringsEntry = {
+  [locale: string]: ContentfulDocument | undefined;
+};
 
 export type ContentfulCommonStringsMapping = {
-  [key: string]: { [locale: string]: ContentfulDocument | undefined };
+  [key: string]: ContentfulCommonStringsEntry;
 };
 
 export class ContentfulCommonStrings {

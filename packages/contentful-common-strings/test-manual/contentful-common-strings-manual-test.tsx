@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { getHTMLElement } from "@justfixnyc/util";
-import { fetchContentfulCommonStrings } from "../src/fetch-common-strings";
+import { fetchContentfulCommonStrings } from "../src";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 const container = getHTMLElement("div", "#root");
