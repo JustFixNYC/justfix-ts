@@ -5,19 +5,32 @@ export {
   fetchContentfulCommonStrings,
 } from "./fetch-common-strings";
 
+/**
+ * A Contentful common string's value, available in various locales.
+ */
 export type ContentfulCommonStringsEntry = {
   [locale: string]: ContentfulDocument | undefined;
 };
 
+/**
+ * A mapping from ids to values for Contentful common strings.
+ */
 export type ContentfulCommonStringsMapping = {
-  [key: string]: ContentfulCommonStringsEntry;
+  [id: string]: ContentfulCommonStringsEntry;
 };
 
+/**
+ * A convenience class that makes it easy to access Contentful common strings.
+ */
 export class ContentfulCommonStrings {
   constructor(private readonly mapping: ContentfulCommonStringsMapping) {}
 
-  get(key: string, locale: string): ContentfulDocument | null {
-    const locales = this.mapping[key];
+  /**
+   * Return the Contentful common string with the given id in the given locale,
+   * or `null` if it doesn't exist.
+   */
+  get(id: string, locale: string): ContentfulDocument | null {
+    const locales = this.mapping[id];
     const result = locales && locales[locale];
     if (result === undefined) return null;
     return result;
