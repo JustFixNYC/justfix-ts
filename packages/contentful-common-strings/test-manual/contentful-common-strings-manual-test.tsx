@@ -1,44 +1,50 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { getHTMLElement } from "@justfixnyc/util";
-import { fetchContentfulCommonStrings } from "../src";
+import {
+  ContentfulCommonStringsEntry,
+  fetchContentfulCommonStrings,
+} from "../src";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 const container = getHTMLElement("div", "#root");
 
+const CommonStringsForId: React.FC<{
+  id: string;
+  entry: ContentfulCommonStringsEntry;
+}> = ({ id, entry }) => (
+  <>
+    {Object.keys(entry).map((locale) => {
+      const doc = entry[locale];
+
+      if (!doc) return null;
+
+      return (
+        <div key={locale}>
+          <h2>
+            Common string <code>{id}</code> ({locale})
+          </h2>
+          <div style={{ paddingLeft: "2em" }}>
+            {documentToReactComponents(doc)}
+          </div>
+        </div>
+      );
+    })}
+  </>
+);
+
 async function main() {
   const map = await fetchContentfulCommonStrings();
 
-  const keys = Object.keys(map);
-
   const el = ReactDOM.render(
-    <div>
-      {keys.map((key) => {
-        const entry = map[key];
-        const locales = Object.keys(entry);
-
-        return (
-          <React.Fragment key={key}>
-            {locales.map((locale) => {
-              const doc = entry[locale];
-
-              if (!doc) return null;
-
-              return (
-                <div key={locale}>
-                  <h2>
-                    Common string <code>{key}</code> ({locale})
-                  </h2>
-                  <div style={{ paddingLeft: "2em" }}>
-                    {documentToReactComponents(doc)}
-                  </div>
-                </div>
-              );
-            })}
-          </React.Fragment>
-        );
-      })}
-    </div>,
+    <>
+      <p>
+        Below are all the Contentful common strings for all available locales.
+      </p>
+      {Object.keys(map).map((id) => (
+        <CommonStringsForId id={id} entry={map[id]} key={id} />
+      ))}
+    </>,
     container
   );
 }
