@@ -1,0 +1,51 @@
+{
+  "name": "@justfixnyc/contentful-common-strings",
+  "version": "0.0.2",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/justfixnyc/justfix-ts/tree/master/packages/contentful-common-strings"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@babel/core": "7.6.4",
+    "@babel/preset-env": "7.6.3",
+    "@babel/preset-react": "^7.9.4",
+    "@babel/preset-typescript": "7.6.0",
+    "@contentful/rich-text-react-renderer": "^15.0.0",
+    "@justfixnyc/util": "^0.3.0",
+    "@types/jest": "24.0.15",
+    "@types/react": "^16.9.26",
+    "@types/react-dom": "^16.9.5",
+    "concurrently": "^5.0.0",
+    "http-server": "^0.12.3",
+    "jest": "24.9.0",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "rollup": "^1.23.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-replace": "^2.2.0",
+    "typescript": "3.6.4"
+  },
+  "scripts": {
+    "cli": "node bin/cli.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "prepublish": "yarn build",
+    "build": "tsc && rollup -c",
+    "watch": "concurrently --kill-others \"tsc --watch --preserveWatchOutput\" \"rollup -c --watch\" \"http-server test-manual\""
+  },
+  "bin": {
+    "contentful-common-strings": "./bin/cli.js"
+  },
+  "dependencies": {
+    "@contentful/rich-text-types": "^15.0.0",
+    "cross-fetch": "^3.1.4",
+    "yargs": "^17.0.1"
+  }
+}
