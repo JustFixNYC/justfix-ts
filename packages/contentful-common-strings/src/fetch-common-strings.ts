@@ -31,7 +31,7 @@ export const DEFAULT_CONTENTFUL_COMMON_STRINGS_CONFIG: ContentfulCommonStringsCo
   accessToken: "Fli_OMdKgUFw6tEX3uv6HqvptuG6A6jn9bZVPlHZj8E",
 };
 
-function toCommonStringsMap(raw: any): ContentfulCommonStringsMapping {
+export function toCommonStringsMap(raw: any): ContentfulCommonStringsMapping {
   const result: ContentfulCommonStringsMapping = {};
 
   for (let item of raw.items) {
@@ -46,7 +46,7 @@ function toCommonStringsMap(raw: any): ContentfulCommonStringsMapping {
   return result;
 }
 
-function getContentfulEntriesURL(
+export function getContentfulEntriesURL(
   options?: Partial<ContentfulCommonStringsConfig>
 ): string {
   const config = { ...DEFAULT_CONTENTFUL_COMMON_STRINGS_CONFIG, ...options };
