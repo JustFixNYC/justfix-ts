@@ -1,14 +1,15 @@
-import { Document as ContentfulDocument } from "@contentful/rich-text-types";
+import {
+  Document as ContentfulDocument,
+  BLOCKS,
+} from "@contentful/rich-text-types";
 import { ContentfulCommonStrings } from "../src";
 
-// This *is* a ContentfulDocument but the typing
-// is stupid and doesn't recognize it as such, so we'll force it.
 const doc: ContentfulDocument = {
-  nodeType: "document",
+  nodeType: BLOCKS.DOCUMENT,
   data: {},
   content: [
     {
-      nodeType: "paragraph",
+      nodeType: BLOCKS.PARAGRAPH,
       content: [
         {
           nodeType: "text",
@@ -17,9 +18,10 @@ const doc: ContentfulDocument = {
           data: {},
         },
       ],
+      data: {},
     },
   ],
-} as any;
+};
 
 describe("ContentfulCommonStrings ", () => {
   const ccs = new ContentfulCommonStrings({
