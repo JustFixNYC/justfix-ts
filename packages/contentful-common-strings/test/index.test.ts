@@ -1,37 +1,15 @@
-import {
-  Document as ContentfulDocument,
-  BLOCKS,
-} from "@contentful/rich-text-types";
 import { ContentfulCommonStrings } from "../src";
-
-const doc: ContentfulDocument = {
-  nodeType: BLOCKS.DOCUMENT,
-  data: {},
-  content: [
-    {
-      nodeType: BLOCKS.PARAGRAPH,
-      content: [
-        {
-          nodeType: "text",
-          value: "Hello!",
-          marks: [],
-          data: {},
-        },
-      ],
-      data: {},
-    },
-  ],
-};
+import { TEST_CONTENTFUL_DOC } from "./util";
 
 describe("ContentfulCommonStrings ", () => {
   const ccs = new ContentfulCommonStrings({
     boop: {
-      en: doc,
+      en: TEST_CONTENTFUL_DOC,
     },
   });
 
   it("returns localized strings that exist", () => {
-    expect(ccs.get("boop", "en")).toBe(doc);
+    expect(ccs.get("boop", "en")).toBe(TEST_CONTENTFUL_DOC);
   });
 
   it("returns null when a localization doesn't exist", () => {
