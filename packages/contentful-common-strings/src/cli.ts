@@ -4,6 +4,10 @@ import {
   fetchContentfulCommonStrings,
   DEFAULT_CONTENTFUL_COMMON_STRINGS_CONFIG as CONFIG_DEFAULTS,
 } from "./fetch-common-strings.js";
+import { ContentfulCommonStringsMapping } from "./index.js";
+
+/** Filename indicating stdout rather than an actual file. */
+const STDOUT = "--";
 
 export function main() {
   yargs
@@ -15,8 +19,8 @@ export function main() {
       (yargs) => {
         yargs.option("o", {
           alias: "outfile",
-          default: "--",
-          describe: "The file to write the JSON to, or '--' to use stdout",
+          default: STDOUT,
+          describe: `The file to write the JSON to, or '${STDOUT}' to use stdout`,
           type: "string",
         });
 
@@ -43,6 +47,13 @@ export function main() {
           describe: "Contentful access token",
           type: "string",
         });
+
+        yargs.option("dev", {
+          default: false,
+          describe:
+            "Enable offline developer mode (network errors will not crash this program)",
+          type: "boolean",
+        });
       },
       async (argv: {
         outfile: string;
@@ -50,20 +61,36 @@ export function main() {
         tag: string;
         spaceId: string;
         accessToken: string;
+        dev: boolean;
       }) => {
-        const { origin, tag, spaceId, accessToken } = argv;
-        const map = await fetchContentfulCommonStrings({
-          origin,
-          tag,
-          spaceId,
-          accessToken,
-        });
+        const { origin, tag, spaceId, accessToken, dev, outfile } = argv;
+        let map: ContentfulCommonStringsMapping = {};
+        try {
+          map = await fetchContentfulCommonStrings({
+            origin,
+            tag,
+            spaceId,
+            accessToken,
+          });
+        } catch (e) {
+          if (dev) {
+            process.stderr.write(`${e}\nOffline development mode enabled, `);
+            if (outfile !== STDOUT && fs.existsSync(outfile)) {
+              process.stderr.write(`keeping existing ${outfile}.\n`);
+              return;
+            } else {
+              process.stderr.write(`outputting empty JSON.\n`);
+            }
+          } else {
+            throw e;
+          }
+        }
         const output = JSON.stringify(map, null, 2) + "\n";
-        if (argv.outfile === "--") {
+        if (outfile === STDOUT) {
           process.stdout.write(output);
         } else {
-          fs.writeFileSync(argv.outfile, output);
-          console.log(`Wrote ${argv.outfile}.`);
+          fs.writeFileSync(outfile, output);
+          console.log(`Wrote ${outfile}.`);
         }
       }
     )
