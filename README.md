@@ -137,6 +137,9 @@ issues can be done with `yarn prettier:fix`.
 ## Publishing packages
 
 Make sure you've updated the Changelog to reflect the changes you made.
+Each package has its own changelog - it's the `CHANGELOG.md` file next to the
+`README.md` for the package.
+
 Increment the minor version if it's a backwards-compatible change, and the
 major version of it's a breaking change.
 
