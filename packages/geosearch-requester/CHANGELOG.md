@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.0 (2022-11-29)
+
+* Switch from v1 to the new v2 endpoint, breaking change to results structure.
+* BBL property for `GeoSearchResults` changes from `pad_bbl` to `addendum.pad.bbl`
+
 ## 0.4.0 (2020-11-25)
 
 Add CommonJS module support.

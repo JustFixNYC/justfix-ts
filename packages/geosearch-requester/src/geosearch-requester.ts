@@ -7,7 +7,7 @@ export type GeoSearchRequesterOptions = SearchRequesterOptions<
 > & {
   /**
    * (Optional)
-   * A custom base url for GeoAutocomplete endpoint, like `https://www.boop.com/v1/autocomplete`.
+   * A custom base url for GeoAutocomplete endpoint, like `https://www.boop.com/v2/autocomplete`.
    * If not defined, the standard NYC Planning Labs GeoSearch Autocomplete url is used.
    */
   customGeoAutocompleteUrl?: string;
@@ -17,20 +17,21 @@ export type GeoSearchRequesterOptions = SearchRequesterOptions<
  * For documentation about this endpoint, see:
  *
  * https://geosearch.planninglabs.nyc/docs/#autocomplete
+ *
  */
 export const GEO_AUTOCOMPLETE_URL =
-  "https://geosearch.planninglabs.nyc/v1/autocomplete";
+  "https://geosearch.planninglabs.nyc/v2/autocomplete";
 
 /**
  * The keys here were obtained experimentally, I'm not actually sure
  * if/where they are formally specified.
  */
 export enum GeoSearchBoroughGid {
-  Manhattan = "whosonfirst:borough:1",
-  Bronx = "whosonfirst:borough:2",
-  Brooklyn = "whosonfirst:borough:3",
-  Queens = "whosonfirst:borough:4",
-  StatenIsland = "whosonfirst:borough:5",
+  Manhattan = "whosonfirst:borough:421205771",
+  Bronx = "whosonfirst:borough:421205773",
+  Brooklyn = "whosonfirst:borough:421205765",
+  Queens = "whosonfirst:borough:421205767",
+  StatenIsland = "whosonfirst:borough:421205775",
 }
 
 /**
@@ -60,7 +61,7 @@ export interface GeoSearchProperties {
   /** e.g. "Brooklyn" */
   borough: string;
 
-  /** e.g. "whosonfirst:borough:2" */
+  /** e.g. "whosonfirst:borough:421205773" */
   borough_gid: GeoSearchBoroughGid;
 
   /** e.g. "150" */
@@ -79,7 +80,11 @@ export interface GeoSearchProperties {
    * The 10-digit padded Borough-Block-Lot (BBL) number for the
    * property, e.g. "3002920026".
    */
-  pad_bbl: string;
+  addendum: {
+    pad: {
+      bbl: string;
+    };
+  };
 
   /**
    * The zip code, e.g. "11201". Note that in extremely rare

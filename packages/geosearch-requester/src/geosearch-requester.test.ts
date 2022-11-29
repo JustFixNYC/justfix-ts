@@ -32,7 +32,7 @@ describe("GeoSearchRequester", () => {
   it("uses the standard GeoAutocomplete url when no custom one is defined", () => {
     var r = new GeoSearchRequester(makeOpts());
     expect(r.searchQueryToURL("Boopy Boop")).toBe(
-      "https://geosearch.planninglabs.nyc/v1/autocomplete?text=Boopy%20Boop"
+      "https://geosearch.planninglabs.nyc/v2/autocomplete?text=Boopy%20Boop"
     );
   });
 });

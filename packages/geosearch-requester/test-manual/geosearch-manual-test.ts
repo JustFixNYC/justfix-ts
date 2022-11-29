@@ -32,7 +32,7 @@ const gsr = new GeoSearchRequester({
     resultsEl.textContent = "";
     for (let { properties: props } of results.features) {
       const li = document.createElement("li");
-      li.textContent = `${props.name}, ${props.borough} (BBL ${props.pad_bbl})`;
+      li.textContent = `${props.name}, ${props.borough} (BBL ${props.addendum.pad.bbl})`;
       resultsEl.appendChild(li);
     }
   },
