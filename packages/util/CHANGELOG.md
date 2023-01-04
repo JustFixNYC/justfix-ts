@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.4.1 (2023-01-04)
+
+Pinned typescript development dependency to 3.9.10.
+
 ## 0.4.0 (2022-12-21)
 
 Add `storageFactory` function to help with avoid
